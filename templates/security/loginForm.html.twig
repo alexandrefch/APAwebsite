@@ -1,0 +1,15 @@
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input type="email" placeholder="mdupont1@mail.fr" value="{{ last_email }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword">Mot de passe</label>
+        <input type="password" placeholder="**********" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div>
+    <button class="btn btn-full btn-normal">Connexion</button>
+</form>

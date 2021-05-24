@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Identification{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+{% block body %}
+    <div class="fullViewport autoColumn">
+        <div id="illustrationPane" class="flexCentered">
+            <img src="{{ asset('images/sport_illustration.svg') }}" alt="sport illustration">
+        </div>
+        <div id="accessPane" class="flexCentered">
+            <div class="panel shadow">
+                <div class="header">
+                    <div id="loginTab" class="tab active" onclick="openLoginPanel()">Connexion</div>
+                    <div id="registerTab" class="tab" onclick="openRegisterPanel()">Inscription</div>
+                </div>
+                <div class="body">
+                    <div id="loginForm">
+                        {% include 'security/loginForm.html.twig' %}
+                        <span class="link center mt" onclick="openRegisterPanel()">Pas encore inscrit ?</span>
+                    </div>
+                    <div id="registerForm" class="hide">
+                        {% include 'security/registerForm.html.twig' %}
+                        <span class="link center mt" onclick="openLoginPanel()">Déjà inscrit ?</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="application/javascript">
+        function openLoginPanel(){
+            document.getElementById('loginForm').classList.remove('hide');
+            document.getElementById('registerForm').classList.add('hide');
+            document.getElementById('loginTab').classList.add('active');
+            document.getElementById('registerTab').classList.remove('active');
+        }
+        function openRegisterPanel(){
+            document.getElementById('loginForm').classList.add('hide');
+            document.getElementById('registerForm').classList.remove('hide');
+            document.getElementById('loginTab').classList.remove('active');
+            document.getElementById('registerTab').classList.add('active');
+        }
+    </script>
+{% endblock %}
