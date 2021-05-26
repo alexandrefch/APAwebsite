@@ -10,13 +10,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/home", name="home")
      */
     public function index(): Response
     {
-        if( $this->getUser() == null )
-            return $this->forward('App\Controller\SecurityController::authenticate');
-        else
-            return $this->render('home/index.html.twig');
+        return $this->render('home/index.html.twig');
     }
 }

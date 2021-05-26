@@ -16,11 +16,48 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    public function authenticate( AuthenticationUtils $authenticationUtils, Request $request, UserPasswordEncoderInterface
+    /**
+     * @Route("/", name="authenticate")
+     * @return Response
+     */
+    public function index(): Response
+    {
+        $form = $this->createForm(
+            RegistrationFormType::class,
+            new User(),
+            [
+                'action' => $this->generateUrl('app_register')
+            ]);
+
+        return $this->render('security/authenticate.html.twig', [
+            'registrationForm' => $form->createView(),
+            'error' => '',
+            'lastEmail' => '',
+        ]);
+    }
+
+    /**
+     * @Route("/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        //$error = $authenticationUtils->getLastAuthenticationError();
+        return $this->redirectToRoute('/');
+    }
+
+    /**
+     * @Route("/register", name="app_register")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param LoginFormAuthenticator $authenticator
+     * @return Response
+     */
+    public function register(Request $request, UserPasswordEncoderInterface
     $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
-
-        //==============[ REGISTER ]==================
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -47,17 +84,7 @@ class SecurityController extends AbstractController
             );
         }
 
-        //==============[ LOGIN ]==================
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        return $this->render('security/authenticate.html.twig', [
-            'registrationForm' => $form->createView(),
-            'last_email' => "",
-            'last_firstName' => "",
-            'last_lastName' => "",
-            'error' => $error
-        ]);
+        return $this->redirectToRoute('/');
     }
 
     /**
@@ -65,6 +92,6 @@ class SecurityController extends AbstractController
      */
     public function logout(): RedirectResponse
     {
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('app_authenticate');
     }
 }

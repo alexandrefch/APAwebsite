@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210519130554 extends AbstractMigration
+final class Version20210526141202 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -29,7 +29,7 @@ final class Version20210519130554 extends AbstractMigration
         $this->addSql('CREATE TABLE schedule (id INT AUTO_INCREMENT NOT NULL, begin_date_time DATETIME NOT NULL, duration TIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE schedule_patient (schedule_id INT NOT NULL, patient_id INT NOT NULL, INDEX IDX_97B0FB5AA40BC2D5 (schedule_id), INDEX IDX_97B0FB5A6B899279 (patient_id), PRIMARY KEY(schedule_id, patient_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE structure (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE `user` (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, first_name VARCHAR(45) NOT NULL, last_name VARCHAR(45) NOT NULL, phone_number VARCHAR(15) NOT NULL, birth_date DATE NOT NULL, address VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE `user` (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, first_name VARCHAR(45) NOT NULL, last_name VARCHAR(45) NOT NULL, phone_number VARCHAR(15) DEFAULT NULL, birth_date DATE DEFAULT NULL, address VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE activity ADD CONSTRAINT FK_AC74095A7A19A357 FOREIGN KEY (contributor_id) REFERENCES contributor (id)');
         $this->addSql('ALTER TABLE activity ADD CONSTRAINT FK_AC74095A2534008B FOREIGN KEY (structure_id) REFERENCES structure (id)');
         $this->addSql('ALTER TABLE contributor ADD CONSTRAINT FK_DA6F979327BE5D9C FOREIGN KEY (user_profil_id) REFERENCES `user` (id)');

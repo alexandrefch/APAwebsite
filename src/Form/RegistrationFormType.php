@@ -19,6 +19,7 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->setAction($options['action'])
             ->add('firstName',null, [
                 'attr' => [
                     'autocomplete' => 'given-name',
