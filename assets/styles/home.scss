@@ -1,50 +1,110 @@
 @import "colors";
+@import "variables";
 
-#illustrationPane {
-  position: relative;
-  background-color: $color_main;
-  border-bottom-right-radius: 4em;
-  padding: 3em;
-}
-#illustrationPane:before{
-  position: absolute;
-  z-index: -1;
-  display: block;
-  content: "";
-  background-color: $color_background;
-  min-width: 100%;
-  min-height: 100%;
-}
-
-#accessPane{
-  position: relative;
-  background-color: $color_background;
-  border-top-left-radius: 4em;
-  .panel{
-    max-width: 340px;
-    width: 100%;
+header{
+  position: fixed;
+  width: 100%;
+  height: $navbar_height;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  &>div {
+    display: flex;
+    align-items: center;
+    .title {
+      font-size: 1.8em;
+      font-weight: bold;
+      padding: 0 $navbar_padding;
+      span {
+        color: $color_main;
+      }
+    }
   }
-  .alert{
-    margin-top: -1em;
-    margin-bottom: 1.5em;
+  ul{
+    list-style-type: none;
+    display: flex;
+    li{
+      margin-right:  2em;
+      height: 2rem;
+      line-height: 2rem;
+      a{
+        font-size: 1.1em;
+        color: $color_main;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        svg{
+          fill:$color_main;
+          width: 1.2em;
+          margin-right: 0.2rem;
+        }
+      }
+      a:visited{
+        color: $color_main;
+      }
+    }
+    li.split{
+      border-left: solid 1px $color_main;
+      min-height: 100%;
+    }
+  }
+  #userProfil{
+    padding: 0 $navbar_padding;
+    height: 100%;
+    background-color: $color_main;
+    color:white;
+    display: flex;
+    width: $navbar_width;
+    &>div{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+      }
+    }
+    .userId{
+      margin-top: 0.2rem;
+      font-size: 0.9em;
+      font-weight: 400;
+    }
+    #menuIcon {
+      display: none;
+      img {
+        width: 1.9rem;
+        margin-left: 2rem;
+        transition: all 100ms ease-in-out;
+      }
+    }
+  }
+  #userProfil:hover{
+    cursor: pointer;
+    img{
+      transform: scale(1.15);
+    }
   }
 }
 
-#accessPane:before{
-  position: absolute;
-  z-index: -1;
-  display: block;
-  content: "";
-  background-color: $color_main;
-  min-width: 100%;
-  min-height: 100%;
+#pageBody{
+  margin-top: $navbar_height;
 }
 
 @media (max-width: 800px) {
-  #illustrationPane{
-      display: none;
+  #menuIcon{
+    display: block !important;
   }
-  #accessPane{
-    border-top-left-radius: 0;
+  #navbar{
+    position: fixed;
+    width: $navbar_width;
+    height: calc( 100vh - #{$navbar_height});
+    top: $navbar_height;
+    right: 0;
+    background-color: white;
   }
 }

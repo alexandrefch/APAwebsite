@@ -23,7 +23,7 @@ class Contributor
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $userProfil;
+    private $userProfile;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="contributor")
@@ -40,14 +40,14 @@ class Contributor
         return $this->id;
     }
 
-    public function getUserProfil(): ?User
+    public function getUserProfile(): ?User
     {
-        return $this->userProfil;
+        return $this->userProfile;
     }
 
-    public function setUserProfil(User $userProfil): self
+    public function setUserProfile(User $userProfile): self
     {
-        $this->userProfil = $userProfil;
+        $this->userProfile = $userProfile;
 
         return $this;
     }

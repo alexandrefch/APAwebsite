@@ -6,6 +6,7 @@ use App\Repository\PatientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity(repositoryClass=PatientRepository::class)
@@ -23,7 +24,7 @@ class Patient
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $userProfil;
+    private $userProfile;
 
     /**
      * @ORM\OneToMany(targetEntity=Prescription::class, mappedBy="patient")
@@ -40,11 +41,17 @@ class Patient
      */
     private $patientFeedbacks;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Doctor::class, mappedBy="patients")
+     */
+    private $doctors;
+
     public function __construct()
     {
         $this->prescriptions = new ArrayCollection();
         $this->schedules = new ArrayCollection();
         $this->patientFeedbacks = new ArrayCollection();
+        $this->doctors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,14 +59,14 @@ class Patient
         return $this->id;
     }
 
-    public function getUserProfil(): ?User
+    public function getUserProfile(): ?User
     {
-        return $this->userProfil;
+        return $this->userProfile;
     }
 
-    public function setUserProfil(User $userProfil): self
+    public function setUserProfile(User $userProfile): self
     {
-        $this->userProfil = $userProfil;
+        $this->userProfile = $userProfile;
 
         return $this;
     }
@@ -146,6 +153,33 @@ class Patient
             if ($patientFeedback->getPatient() === $this) {
                 $patientFeedback->setPatient(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Doctor[]
+     */
+    public function getDoctors(): Collection
+    {
+        return $this->doctors;
+    }
+
+    public function addDoctor(Doctor $doctor): self
+    {
+        if (!$this->doctors->contains($doctor)) {
+            $this->doctors[] = $doctor;
+            $doctor->addPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDoctor(Doctor $doctor): self
+    {
+        if ($this->doctors->removeElement($doctor)) {
+            $doctor->removePatient($this);
         }
 
         return $this;

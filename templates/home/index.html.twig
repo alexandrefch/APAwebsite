@@ -1,11 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue{% endblock %}
-
 {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
     {{ encore_entry_link_tags('home') }}
 {% endblock %}
 
 {% block body %}
+    <header class="shadow">
+        <div>
+            <div class="title">
+                P<span>apa</span>
+            </div>
+            <div id="navbar">
+                <ul>
+                    <li><a href="">Agenda</a></li>
+                    <li><a href="">Mon suivi</a></li>
+                    {% if isDoctor %}
+                        <li class="split"></li>
+                        <li><a href="">Mes patients</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div id="userProfil" class="shadow">
+            <div>
+                <span>{{ user.getFirstName() ~ ' ' ~ user.getLastName() }}</span>
+                <span class="userId">{{ user.getUid() }}</span>
+            </div>
+            <div id="menuIcon">
+                <img src="{{ asset('images/menu.svg') }}" alt="menu icon">
+            </div>
+        </div>
+    </header>
+    <div id="pageBody" style="min-height: 200vh;">
+    </div>
 {% endblock %}

@@ -14,12 +14,19 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    public const UID_LENGTH = 5;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="integer", unique=true)
+     */
+    private $uid;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -65,6 +72,29 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function generateUid(): ?int
+    {
+        $key = random_int(1,9);
+        for($i=1;$i<self::UID_LENGTH;$i++)
+        {
+            $key .= random_int(0,9);
+        }
+        return $key;
+    }
+
+    public function getUid(): ?int
+    {
+        return $this->uid;
+    }
+
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
     }
 
     public function getEmail(): ?string

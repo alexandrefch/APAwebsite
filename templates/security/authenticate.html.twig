@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
-    {{ encore_entry_link_tags('home') }}
+    {{ encore_entry_link_tags('authenticate') }}
 {% endblock %}
 
 {% block body %}
@@ -20,11 +20,11 @@
                 </div>
                 <div class="body">
                     <div id="loginForm">
-                        {% include 'security/loginForm.html.twig' %}
+                        {% include 'security/loginForm.twig' %}
                         <span class="link center mt" onclick="openRegisterPanel()">Pas encore inscrit ?</span>
                     </div>
                     <div id="registerForm" class="hide">
-                        {% include 'security/registerForm.html.twig' %}
+                        {% include 'security/registerForm.twig' %}
                         <span class="link center mt" onclick="openLoginPanel()">Déjà inscrit ?</span>
                     </div>
                 </div>

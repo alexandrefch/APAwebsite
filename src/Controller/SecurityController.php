@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Doctor;
+use App\Entity\Patient;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
@@ -22,12 +24,14 @@ class SecurityController extends AbstractController
      */
     public function index(): Response
     {
+        if($this->getUser()!=null)
+            return $this->redirectToRoute('home');
+
         $form = $this->createForm(
             RegistrationFormType::class,
             new User(),
-            [
-                'action' => $this->generateUrl('app_register')
-            ]);
+            ['action' => $this->generateUrl('app_register')]
+        );
 
         return $this->render('security/authenticate.html.twig', [
             'registrationForm' => $form->createView(),
@@ -43,8 +47,11 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        //$error = $authenticationUtils->getLastAuthenticationError();
-        return $this->redirectToRoute('/');
+        $error = $authenticationUtils->getLastAuthenticationError();
+        return $this->redirectToRoute(
+            'authenticate',
+            ['error'=>$error]
+        );
     }
 
     /**
@@ -54,6 +61,7 @@ class SecurityController extends AbstractController
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $authenticator
      * @return Response
+     * @throws \Exception
      */
     public function register(Request $request, UserPasswordEncoderInterface
     $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
@@ -71,10 +79,22 @@ class SecurityController extends AbstractController
                 )
             );
 
+            do {
+                $uid = User::generateUid();
+            } while (
+                $this->getDoctrine()
+                    ->getRepository(User::class)
+                    ->findBy(['uid'=>$uid]) != null
+            );
+            $user->setUid($uid);
+
+            $patient = new Patient();
+            $patient->setUserProfile($user);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
+            $entityManager->persist($patient);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

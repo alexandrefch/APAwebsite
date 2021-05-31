@@ -23,16 +23,22 @@ class Doctor
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $userProfil;
+    private $userProfile;
 
     /**
      * @ORM\OneToMany(targetEntity=Prescription::class, mappedBy="doctor")
      */
     private $prescriptions;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Patient::class, inversedBy="doctors")
+     */
+    private $patients;
+
     public function __construct()
     {
         $this->prescriptions = new ArrayCollection();
+        $this->patients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -40,14 +46,14 @@ class Doctor
         return $this->id;
     }
 
-    public function getUserProfil(): ?User
+    public function getUserProfile(): ?User
     {
-        return $this->userProfil;
+        return $this->userProfile;
     }
 
-    public function setUserProfil(User $userProfil): self
+    public function setUserProfile(User $userProfile): self
     {
-        $this->userProfil = $userProfil;
+        $this->userProfile = $userProfile;
 
         return $this;
     }
@@ -78,6 +84,30 @@ class Doctor
                 $prescription->setDoctor(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Patient[]
+     */
+    public function getPatients(): Collection
+    {
+        return $this->patients;
+    }
+
+    public function addPatient(Patient $patient): self
+    {
+        if (!$this->patients->contains($patient)) {
+            $this->patients[] = $patient;
+        }
+
+        return $this;
+    }
+
+    public function removePatient(Patient $patient): self
+    {
+        $this->patients->removeElement($patient);
 
         return $this;
     }
