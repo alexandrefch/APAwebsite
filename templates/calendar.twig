@@ -1,3 +1,28 @@
-<div>
-    dqsds
+{% set days = ['Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'] %}
+
+<div class="calendar">
+    <div class="hours">
+        {% for i in 0..13 %}
+            <div>
+                {#
+                +7 mean that we start at 7am,
+                if hour is between 0 and 9 we add a 0 before to make it two digit long
+                #}
+                {% if (i+7)|length == 1 %}0{% endif %}{{i+7}}:00
+            </div>
+        {% endfor %}
+    </div>
+    {% for day in days %}
+        <div class="day">
+            <div class="head">
+                <span class="weekDay">{{ day }}</span>
+                <span class="date">31/04</span>
+            </div>
+            <div class="body">
+                {% for i in 0..13 %}
+                    <div></div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
 </div>

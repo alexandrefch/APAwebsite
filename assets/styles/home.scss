@@ -1,13 +1,17 @@
 @import "colors";
 @import "variables";
 
+@import "calendar";
+
 header{
+  position: fixed;
   width: 100vw;
   height: $navbar_height;
   display: flex;
   justify-content: space-between;
   background-color: white;
   border-bottom: solid 2px $color_lightGray;
+  top: 0;
   &>*{
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -30,11 +34,8 @@ header{
 }
 
 .pageContainer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
-  width: max-content;
-  margin: auto;
+  max-width: 1200px;
+  margin: $navbar_height auto 0 auto;
+  height: calc( 100vh - #{$navbar_height});
+  padding: 2rem;
 }
