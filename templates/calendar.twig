@@ -2,15 +2,23 @@
 
 <div class="calendar">
     <div class="hours">
-        {% for i in 0..13 %}
-            <div>
-                {#
-                +7 mean that we start at 7am,
-                if hour is between 0 and 9 we add a 0 before to make it two digit long
-                #}
-                {% if (i+7)|length == 1 %}0{% endif %}{{i+7}}:00
-            </div>
-        {% endfor %}
+        <div class="head">
+            Heure
+        </div>
+        <div class="body">
+            <div class="border"></div>
+            {% for i in 0..12 %}
+                <div>
+                    {#
+                    +7 mean that we start at 7am,
+                    if hour is between 0 and 9 we add a 0 before to make it two digit long
+                    #}
+                    {% if (i+8)|length == 1 %}0{% endif %}{{i+8}}:00
+                </div>
+            {% endfor %}
+            <div class="border"></div>
+        </div>
+
     </div>
     {% for day in days %}
         <div class="day">
@@ -19,9 +27,17 @@
                 <span class="date">31/04</span>
             </div>
             <div class="body">
-                {% for i in 0..13 %}
-                    <div></div>
-                {% endfor %}
+                <div class="grid">
+                    {% for i in 0..13 %}
+                        <div></div>
+                    {% endfor %}
+                </div>
+                <div class="event">
+                    <div class="body">
+                        <h1>Escalade</h1>
+
+                    </div>
+                </div>
             </div>
         </div>
     {% endfor %}
