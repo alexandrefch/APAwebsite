@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Doctor;
-use App\Entity\Patient;
-use App\Entity\User;
+use App\Entity\Account;
+use App\Entity\Person;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +18,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/", name="authenticate")
+     * @Route("/", name="app_authenticate")
      * @return Response
      */
     public function index(): Response
@@ -29,7 +28,7 @@ class SecurityController extends AbstractController
 
         $form = $this->createForm(
             RegistrationFormType::class,
-            new User(),
+            new Account(),
             ['action' => $this->generateUrl('app_register')]
         );
 
@@ -49,7 +48,7 @@ class SecurityController extends AbstractController
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         return $this->redirectToRoute(
-            'authenticate',
+            'app_authenticate',
             ['error'=>$error]
         );
     }
@@ -66,19 +65,21 @@ class SecurityController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface
     $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $account = new Account();
+        $form = $this->createForm(RegistrationFormType::class, $account);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
+            $account->setPassword(
                 $passwordEncoder->encodePassword(
-                    $user,
+                    $account,
                     $form->get('plainPassword')->getData()
                 )
             );
 
+            /*
+             * TODO : adapt or remove this
             do {
                 $uid = User::generateUid();
             } while (
@@ -86,25 +87,29 @@ class SecurityController extends AbstractController
                     ->getRepository(User::class)
                     ->findBy(['uid'=>$uid]) != null
             );
-            $user->setUid($uid);
+            $account->setUid($uid);
+            */
 
-            $patient = new Patient();
-            $patient->setUserProfile($user);
+            $person = new Person();
+            $person->setFirstName($form->get('firstName')->getData());
+            $person->setLastName($form->get('lastName')->getData());
+
+            $account->setPerson($person);
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->persist($patient);
+            $entityManager->persist($person);
+            $entityManager->persist($account);
             $entityManager->flush();
 
             return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
+                $account,
                 $request,
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
         }
 
-        return $this->redirectToRoute('/');
+        return $this->redirectToRoute('app_authenticate');
     }
 
     /**

@@ -20,19 +20,30 @@ class Structure
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=15, nullable=true)
      */
-    private $name;
+    private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $address;
+    private $url;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="structure")
      */
     private $activities;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=StructureType::class, inversedBy="structures")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
 
     public function __construct()
     {
@@ -44,26 +55,38 @@ class Structure
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getPhoneNumber(): ?string
     {
-        return $this->name;
+        return $this->phoneNumber;
     }
 
-    public function setName(string $name): self
+    public function setPhoneNumber(?string $phoneNumber): self
     {
-        $this->name = $name;
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getUrl(): ?string
     {
-        return $this->address;
+        return $this->url;
     }
 
-    public function setAddress(string $address): self
+    public function setUrl(?string $url): self
     {
-        $this->address = $address;
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
@@ -94,6 +117,18 @@ class Structure
                 $activity->setStructure(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?StructureType
+    {
+        return $this->type;
+    }
+
+    public function setType(?StructureType $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

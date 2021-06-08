@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\PatientFeedback;
+use App\Entity\Pathology;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method PatientFeedback|null find($id, $lockMode = null, $lockVersion = null)
- * @method PatientFeedback|null findOneBy(array $criteria, array $orderBy = null)
- * @method PatientFeedback[]    findAll()
- * @method PatientFeedback[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Pathology|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Pathology|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Pathology[]    findAll()
+ * @method Pathology[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PatientFeedbackRepository extends ServiceEntityRepository
+class PathologyRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PatientFeedback::class);
+        parent::__construct($registry, Pathology::class);
     }
 
     // /**
-    //  * @return PatientFeedback[] Returns an array of PatientFeedback objects
+    //  * @return Pathology[] Returns an array of Pathology objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PatientFeedbackRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?PatientFeedback
+    public function findOneBySomeField($value): ?Pathology
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

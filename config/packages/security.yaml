@@ -1,6 +1,6 @@
 security:
     encoders:
-        App\Entity\User:
+        App\Entity\Account:
             algorithm: auto
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
@@ -8,7 +8,7 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Account
                 property: email
     firewalls:
         dev:
@@ -36,4 +36,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/home, roles: ROLE_USER }
+        # - { path: ^/profile, roles: ROLE_USER }

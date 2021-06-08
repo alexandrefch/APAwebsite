@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ContributorRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,64 +18,58 @@ class Contributor
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $userProfile;
+    private $information;
 
     /**
-     * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="contributor")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $activities;
+    private $job;
 
-    public function __construct()
-    {
-        $this->activities = new ArrayCollection();
-    }
+    /**
+     * @ORM\OneToOne(targetEntity=Person::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $person;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserProfile(): ?User
+    public function getInformation(): ?string
     {
-        return $this->userProfile;
+        return $this->information;
     }
 
-    public function setUserProfile(User $userProfile): self
+    public function setInformation(?string $information): self
     {
-        $this->userProfile = $userProfile;
+        $this->information = $information;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Activity[]
-     */
-    public function getActivities(): Collection
+    public function getJob(): ?string
     {
-        return $this->activities;
+        return $this->job;
     }
 
-    public function addActivity(Activity $activity): self
+    public function setJob(?string $job): self
     {
-        if (!$this->activities->contains($activity)) {
-            $this->activities[] = $activity;
-            $activity->setContributor($this);
-        }
+        $this->job = $job;
 
         return $this;
     }
 
-    public function removeActivity(Activity $activity): self
+    public function getPerson(): ?Person
     {
-        if ($this->activities->removeElement($activity)) {
-            // set the owning side to null (unless already changed)
-            if ($activity->getContributor() === $this) {
-                $activity->setContributor(null);
-            }
-        }
+        return $this->person;
+    }
+
+    public function setPerson(Person $person): self
+    {
+        $this->person = $person;
 
         return $this;
     }

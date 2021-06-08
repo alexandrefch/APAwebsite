@@ -203,7 +203,10 @@
             "branch": "master",
             "version": "1.0",
             "ref": "71599f5b0fdeeeec0fb90e9b17c85e6f5e1350c1"
-        }
+        },
+        "files": [
+            "./public/.htaccess"
+        ]
     },
     "symfony/asset": {
         "version": "v5.2.7"
@@ -471,16 +474,16 @@
         ]
     },
     "symfony/security-core": {
-        "version": "v5.2.8"
+        "version": "v5.2.10"
     },
     "symfony/security-csrf": {
-        "version": "v5.2.7"
+        "version": "v5.2.10"
     },
     "symfony/security-guard": {
-        "version": "v5.2.8"
+        "version": "v5.2.10"
     },
     "symfony/security-http": {
-        "version": "v5.2.8"
+        "version": "v5.2.10"
     },
     "symfony/serializer": {
         "version": "v5.2.7"

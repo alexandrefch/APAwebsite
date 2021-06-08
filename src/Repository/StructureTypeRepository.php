@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Schedule;
+use App\Entity\StructureType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Schedule|null find($id, $lockMode = null, $lockVersion = null)
- * @method Schedule|null findOneBy(array $criteria, array $orderBy = null)
- * @method Schedule[]    findAll()
- * @method Schedule[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method StructureType|null find($id, $lockMode = null, $lockVersion = null)
+ * @method StructureType|null findOneBy(array $criteria, array $orderBy = null)
+ * @method StructureType[]    findAll()
+ * @method StructureType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ScheduleRepository extends ServiceEntityRepository
+class StructureTypeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Schedule::class);
+        parent::__construct($registry, StructureType::class);
     }
 
     // /**
-    //  * @return Schedule[] Returns an array of Schedule objects
+    //  * @return StructureType[] Returns an array of StructureType objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ScheduleRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Schedule
+    public function findOneBySomeField($value): ?StructureType
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

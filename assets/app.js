@@ -9,5 +9,3 @@
 import './styles/app.scss';
 import './styles/authenticate.scss';
 
-// start the Stimulus application
-import './bootstrap';

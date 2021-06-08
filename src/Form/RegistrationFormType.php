@@ -2,15 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Account;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -21,6 +19,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->setAction($options['action'])
             ->add('firstName',null, [
+                'mapped'=>false,
                 'attr' => [
                     'autocomplete' => 'given-name',
                     'placeholder'=>'Michel'
@@ -40,6 +39,7 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('lastName',null, [
+                'mapped'=>false,
                 'attr' => [
                     'autocomplete' => 'family-name',
                     'placeholder'=>'Dupont'
@@ -97,6 +97,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('phoneNumber',TelType::class, [
+                'mapped'=>false,
                 'label' => 'Numéro de téléphone',
                 'attr' => [
                     'autocomplete' => 'tel',
@@ -119,7 +120,7 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Account::class,
         ]);
     }
 }
