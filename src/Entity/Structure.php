@@ -45,6 +45,21 @@ class Structure
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $lng;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -129,6 +144,42 @@ class Structure
     public function setType(?StructureType $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getLat(): ?string
+    {
+        return $this->lat;
+    }
+
+    public function setLat(string $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?string
+    {
+        return $this->lng;
+    }
+
+    public function setLng(string $lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }

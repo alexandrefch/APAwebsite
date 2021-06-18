@@ -25,7 +25,7 @@ class ActivityType
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Activity::class, mappedBy="discipline")
+     * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="discipline")
      */
     private $activities;
 
@@ -63,7 +63,7 @@ class ActivityType
     {
         if (!$this->activities->contains($activity)) {
             $this->activities[] = $activity;
-            $activity->addDiscipline($this);
+            $activity->setDiscipline($this);
         }
 
         return $this;
@@ -72,7 +72,10 @@ class ActivityType
     public function removeActivity(Activity $activity): self
     {
         if ($this->activities->removeElement($activity)) {
-            $activity->removeDiscipline($this);
+            // set the owning side to null (unless already changed)
+            if ($activity->getDiscipline() === $this) {
+                $activity->setDiscipline(null);
+            }
         }
 
         return $this;

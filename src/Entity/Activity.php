@@ -35,11 +35,6 @@ class Activity
     private $practicePlace;
 
     /**
-     * @ORM\ManyToMany(targetEntity=ActivityType::class, inversedBy="activities")
-     */
-    private $discipline;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Pathology::class, inversedBy="intended")
      */
     private $prevention;
@@ -55,12 +50,23 @@ class Activity
      */
     private $structure;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Schedule::class, mappedBy="activity")
+     */
+    private $schedules;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=ActivityType::class, inversedBy="activities")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $discipline;
+
     public function __construct()
     {
         $this->practicePlace = new ArrayCollection();
-        $this->discipline = new ArrayCollection();
         $this->prevention = new ArrayCollection();
         $this->intended = new ArrayCollection();
+        $this->schedules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,30 +118,6 @@ class Activity
     public function removePracticePlace(PlaceType $practicePlace): self
     {
         $this->practicePlace->removeElement($practicePlace);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ActivityType[]
-     */
-    public function getDiscipline(): Collection
-    {
-        return $this->discipline;
-    }
-
-    public function addDiscipline(ActivityType $discipline): self
-    {
-        if (!$this->discipline->contains($discipline)) {
-            $this->discipline[] = $discipline;
-        }
-
-        return $this;
-    }
-
-    public function removeDiscipline(ActivityType $discipline): self
-    {
-        $this->discipline->removeElement($discipline);
 
         return $this;
     }
@@ -196,6 +178,48 @@ class Activity
     public function setStructure(?Structure $structure): self
     {
         $this->structure = $structure;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Schedule[]
+     */
+    public function getSchedules(): Collection
+    {
+        return $this->schedules;
+    }
+
+    public function addSchedule(Schedule $schedule): self
+    {
+        if (!$this->schedules->contains($schedule)) {
+            $this->schedules[] = $schedule;
+            $schedule->setActivity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSchedule(Schedule $schedule): self
+    {
+        if ($this->schedules->removeElement($schedule)) {
+            // set the owning side to null (unless already changed)
+            if ($schedule->getActivity() === $this) {
+                $schedule->setActivity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDiscipline(): ?ActivityType
+    {
+        return $this->discipline;
+    }
+
+    public function setDiscipline(?ActivityType $discipline): self
+    {
+        $this->discipline = $discipline;
 
         return $this;
     }
