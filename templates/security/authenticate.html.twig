@@ -1,48 +1,52 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Identification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
 
-{% block title %}Identification{% endblock %}
-
-{% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
     {{ encore_entry_link_tags('authenticate') }}
-{% endblock %}
-
-{% block body %}
-    <div class="fullViewport autoColumn">
-        <div id="illustrationPane" class="flexCentered">
-            <img src="{{ asset('images/sport_illustration.svg') }}" alt="sport illustration">
-        </div>
-        <div id="accessPane" class="flexCentered">
-            <div class="panel shadow">
-                <div class="header">
-                    <div id="loginTab" class="tab active" onclick="openLoginPanel()">Connexion</div>
-                    <div id="registerTab" class="tab" onclick="openRegisterPanel()">Inscription</div>
+</head>
+<body>
+<div class="fullViewport autoColumn">
+    <div id="illustrationPane" class="flexCentered">
+        <img src="{{ asset('images/sport_illustration.svg') }}" alt="sport illustration">
+    </div>
+    <div id="accessPane" class="flexCentered">
+        <div class="panel shadow">
+            <div class="header">
+                <div id="loginTab" class="tab active" onclick="openLoginPanel()">Connexion</div>
+                <div id="registerTab" class="tab" onclick="openRegisterPanel()">Inscription</div>
+            </div>
+            <div class="body">
+                <div id="loginForm">
+                    {% include 'security/loginForm.twig' %}
+                    <span class="link center mt" onclick="openRegisterPanel()">Pas encore inscrit ?</span>
                 </div>
-                <div class="body">
-                    <div id="loginForm">
-                        {% include 'security/loginForm.twig' %}
-                        <span class="link center mt" onclick="openRegisterPanel()">Pas encore inscrit ?</span>
-                    </div>
-                    <div id="registerForm" class="hide">
-                        {% include 'security/registerForm.twig' %}
-                        <span class="link center mt" onclick="openLoginPanel()">Déjà inscrit ?</span>
-                    </div>
+                <div id="registerForm" class="hide">
+                    {% include 'security/registerForm.twig' %}
+                    <span class="link center mt" onclick="openLoginPanel()">Déjà inscrit ?</span>
                 </div>
             </div>
         </div>
     </div>
-    <script type="application/javascript">
-        function openLoginPanel(){
-            document.getElementById('loginForm').classList.remove('hide');
-            document.getElementById('registerForm').classList.add('hide');
-            document.getElementById('loginTab').classList.add('active');
-            document.getElementById('registerTab').classList.remove('active');
-        }
-        function openRegisterPanel(){
-            document.getElementById('loginForm').classList.add('hide');
-            document.getElementById('registerForm').classList.remove('hide');
-            document.getElementById('loginTab').classList.remove('active');
-            document.getElementById('registerTab').classList.add('active');
-        }
-    </script>
-{% endblock %}
+</div>
+<script type="application/javascript">
+    function openLoginPanel(){
+        document.getElementById('loginForm').classList.remove('hide');
+        document.getElementById('registerForm').classList.add('hide');
+        document.getElementById('loginTab').classList.add('active');
+        document.getElementById('registerTab').classList.remove('active');
+    }
+    function openRegisterPanel(){
+        document.getElementById('loginForm').classList.add('hide');
+        document.getElementById('registerForm').classList.remove('hide');
+        document.getElementById('loginTab').classList.remove('active');
+        document.getElementById('registerTab').classList.add('active');
+    }
+</script>
+</body>
+</html>

@@ -25,19 +25,19 @@ class Schedule
     private $duration;
 
     /**
-     * @ORM\ManyToOne(targetEntity=person::class, inversedBy="schedules")
+     * @ORM\ManyToOne(targetEntity=Person::class, inversedBy="schedules")
      * @ORM\JoinColumn(nullable=false)
      */
     private $contributor;
 
     /**
-     * @ORM\ManyToOne(targetEntity=activity::class, inversedBy="schedules")
+     * @ORM\ManyToOne(targetEntity=Activity::class, inversedBy="schedules")
      * @ORM\JoinColumn(nullable=false)
      */
     private $activity;
 
     /**
-     * @ORM\ManyToMany(targetEntity=person::class, inversedBy="participates")
+     * @ORM\ManyToMany(targetEntity=Person::class, inversedBy="participates")
      */
     private $participant;
 

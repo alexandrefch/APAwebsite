@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Structure{% endblock %}
+
+{% block body %}
+    <h1>Structure</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ structure.id }}</td>
+            </tr>
+            <tr>
+                <th>PhoneNumber</th>
+                <td>{{ structure.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ structure.url }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ structure.description }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ structure.address }}</td>
+            </tr>
+            <tr>
+                <th>Lat</th>
+                <td>{{ structure.lat }}</td>
+            </tr>
+            <tr>
+                <th>Lng</th>
+                <td>{{ structure.lng }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('structure_index') }}">back to list</a>
+
+    <a href="{{ path('structure_edit', {'id': structure.id}) }}">edit</a>
+
+    {{ include('structure/_delete_form.html.twig') }}
+{% endblock %}

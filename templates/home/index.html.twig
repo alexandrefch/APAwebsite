@@ -1,20 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ encore_entry_link_tags('app') }}
-    {{ encore_entry_link_tags('home') }}
+
+{% endblock %}
+
+{% block head_body %}
+    <section>
+        <div class="searchbar">
+            <label class="input">
+                <input type="text">
+            </label>
+            <div class="glass-icon">
+                {% include 'icon/loupe.svg' %}
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block body %}
-    <header>
-        <div class="left">
-            <img class="logo" src="{{ asset('images/UnivToursIconMin.png') }}" alt="">
-        </div>
-        <div class="right">
-            <img src="{{ asset('images/menu.svg') }}" alt="">
-        </div>
-    </header>
-    <div class="pageContainer">
-        {{ include('calendar.twig') }}
-    </div>
+    <section id="stat-panel">
+        <h2>Papa c'est ...</h2>
+        {% for stat in stats %}
+            <div class="stat">
+                <h3>{{ stat['value'] }}</h3>
+                <p>{{ stat['desc'] }}</p>
+            </div>
+        {% endfor %}
+    </section>
 {% endblock %}

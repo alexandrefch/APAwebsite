@@ -1,20 +1,83 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('home') }}
+    {% block stylesheets %}
+
+    {% endblock %}
+
+    {% block javascripts %}
+        {#{{ encore_entry_script_tags('app') }}#}
+    {% endblock %}
+</head>
+<body>
+<header>
+    <section id="navbar">
+        <div id="navbar-link">
+            <div id="navbar-menu-icon">
+                {% include 'icon/menu.svg' %}
+            </div>
+            <div id="navbar-overlay"></div>
+            <div id="navbar-panel">
+                {% if is_granted('ROLE_CONTRIBUTOR') %}
+                    <div>
+                        <label>Intervenant</label>
+                        <a href="{{ path('my_structure') }}">Mes structures</a>
+                    </div>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div>
+                        <label>Administration</label>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div id="navbar-logo">
+            <a href="{{ path('home') }}">Papa</a>
+        </div>
+        <div id="navbar-account">
+            {% if app.user == null %}
+                <a href="{{ path('app_authenticate') }}">Se connecter</a>
+            {% else %}
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+            {% endif %}
+        </div>
+    </section>
+    {% block head_body %}{% endblock %}
+</header>
+<div id="body">
+    {% block body %}{% endblock %}
+</div>
+<footer>
+
+</footer>
+<script type="application/javascript">
+    let navbarOverlay = document.getElementById('navbar-overlay')
+    let navbarPanel = document.getElementById('navbar-panel')
+    let navbarIcon = document.getElementById('navbar-menu-icon')
+
+    navbarOverlay.addEventListener('click',function(){closeNavbar();})
+    navbarIcon.addEventListener('click',function(){openNavbar();})
+
+    function openNavbar(){
+        navbarOverlay.style.display = 'block';
+        navbarPanel.style.left = '0px';
+    }
+
+    function closeNavbar(){
+        navbarOverlay.style.display = 'none';
+        navbarPanel.style.left = '-250px';
+    }
+</script>
+</body>
 </html>

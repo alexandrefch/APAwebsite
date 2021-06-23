@@ -6,6 +6,7 @@ use App\Entity\Account;
 use App\Entity\Person;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/", name="app_authenticate")
+     * @Route("/authenticate", name="app_authenticate")
      * @return Response
      */
     public function index(): Response
@@ -60,7 +61,7 @@ class SecurityController extends AbstractController
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $authenticator
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function register(Request $request, UserPasswordEncoderInterface
     $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
@@ -77,18 +78,6 @@ class SecurityController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
-            /*
-             * TODO : adapt or remove this
-            do {
-                $uid = User::generateUid();
-            } while (
-                $this->getDoctrine()
-                    ->getRepository(User::class)
-                    ->findBy(['uid'=>$uid]) != null
-            );
-            $account->setUid($uid);
-            */
 
             $person = new Person();
             $person->setFirstName($form->get('firstName')->getData());
