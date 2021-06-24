@@ -47,4 +47,12 @@ class HomeController extends AbstractController
                 ]
             ]);
     }
+
+    /**
+     * @Route("/calendar", name="calendar")
+     */
+    public function calendar(): Response
+    {
+        return $this->render('home/calendar.html.twig');
+    }
 }

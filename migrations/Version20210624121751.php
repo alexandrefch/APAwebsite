@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210617140712 extends AbstractMigration
+final class Version20210624121751 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -32,7 +32,7 @@ final class Version20210617140712 extends AbstractMigration
         $this->addSql('CREATE TABLE place_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE schedule (id INT AUTO_INCREMENT NOT NULL, contributor_id INT NOT NULL, activity_id INT NOT NULL, duration INT NOT NULL, week_day INT NOT NULL, begin TIME NOT NULL, INDEX IDX_5A3811FB7A19A357 (contributor_id), INDEX IDX_5A3811FB81C06096 (activity_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE schedule_person (schedule_id INT NOT NULL, person_id INT NOT NULL, INDEX IDX_56FD9569A40BC2D5 (schedule_id), INDEX IDX_56FD9569217BBB47 (person_id), PRIMARY KEY(schedule_id, person_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE structure (id INT AUTO_INCREMENT NOT NULL, type_id INT NOT NULL, phone_number VARCHAR(15) DEFAULT NULL, url VARCHAR(255) DEFAULT NULL, description LONGTEXT DEFAULT NULL, address VARCHAR(255) NOT NULL, lat VARCHAR(15) NOT NULL, lng VARCHAR(15) NOT NULL, INDEX IDX_6F0137EAC54C8C93 (type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE structure (id INT AUTO_INCREMENT NOT NULL, type_id INT NOT NULL, phone_number VARCHAR(15) DEFAULT NULL, url VARCHAR(255) DEFAULT NULL, description LONGTEXT DEFAULT NULL, address VARCHAR(255) NOT NULL, lat VARCHAR(15) NOT NULL, lng VARCHAR(15) NOT NULL, name VARCHAR(255) NOT NULL, INDEX IDX_6F0137EAC54C8C93 (type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE structure_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE account ADD CONSTRAINT FK_7D3656A4217BBB47 FOREIGN KEY (person_id) REFERENCES person (id)');
         $this->addSql('ALTER TABLE activity ADD CONSTRAINT FK_AC74095A2534008B FOREIGN KEY (structure_id) REFERENCES structure (id)');

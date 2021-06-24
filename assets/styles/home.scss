@@ -18,12 +18,14 @@ body {
     width: 100%;
     display: flex;
     background-color: white;
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     .glass-icon{
         $icon_size: 20px;
 
+        display: grid;
+        place-items: center;
         margin-left: 0.5rem;
         svg{
             width: $icon_size;
@@ -43,19 +45,24 @@ body {
     }
 }
 
+section{
+    margin: auto;
+    padding: 1rem 1.5rem;
+    max-width: 1100px;
+    position: relative;
+}
+
 header{
-    section{
-        padding: 1rem;
-    }
     background-color: $color_main;
-    #navbar{
-        $icon_size: 32px;
+    nav{
+        $icon_size: 30px;
 
         display: grid;
         grid-auto-columns: 1fr;
         grid-auto-flow: column;
         align-items: center;
         color: white;
+        padding: 0.5rem 1.5rem;
 
         #navbar-link {
             #navbar-menu-icon {
@@ -75,6 +82,7 @@ header{
                 width: 100vw;
                 top: 0;
                 left: 0;
+                z-index: 1000;
             }
             #navbar-overlay:hover{
                 cursor: pointer;
@@ -120,6 +128,7 @@ header{
 #body{
     #stat-panel{
         display: grid;
+        place-items: center;
         grid-auto-columns: 1fr;
         grid-auto-flow: column;
         border-radius: 8px;
@@ -138,6 +147,66 @@ header{
 
 footer{
 
+}
+
+.item_list{
+    display: flex;
+    padding: 1rem;
+    margin-bottom: 0.6rem;
+    border-radius: 4px;
+    background-color: white;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.35);
+    -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.35);
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.35);
+    .body{
+        display: block;
+        flex-grow: 1;
+        color: black;
+        text-decoration: none;
+        h3{
+            margin-bottom: 0.5rem;
+        }
+        p{
+            font-size: 0.9rem;
+        }
+    }
+    .action{
+        display: flex;
+        align-items: center;
+        a{
+            display: block;
+            border-radius: 4px;
+            padding: 0.3rem;
+            margin-left: 0.5rem;
+            color: white;
+
+            svg{
+                width: 100%;
+                height: 100%;
+            }
+            transition: all 100ms ease-in-out;
+        }
+        .danger{
+            background-color: #dc3545;
+        }
+        .primary{
+            background-color: #007bff;
+        }
+    }
+}
+
+.item_list:hover{
+    cursor: pointer;
+}
+
+.float_bottomRight{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: #28a745;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 8px;
 }
 
 @media (max-width: 600px) {

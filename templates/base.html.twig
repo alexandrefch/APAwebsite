@@ -22,7 +22,7 @@
 </head>
 <body>
 <header>
-    <section id="navbar">
+    <nav>
         <div id="navbar-link">
             <div id="navbar-menu-icon">
                 {% include 'icon/menu.svg' %}
@@ -33,11 +33,6 @@
                     <div>
                         <label>Intervenant</label>
                         <a href="{{ path('my_structure') }}">Mes structures</a>
-                    </div>
-                {% endif %}
-                {% if is_granted('ROLE_ADMIN') %}
-                    <div>
-                        <label>Administration</label>
                     </div>
                 {% endif %}
             </div>
@@ -52,7 +47,7 @@
                 <a href="{{ path('app_logout') }}">Déconnexion</a>
             {% endif %}
         </div>
-    </section>
+    </nav>
     {% block head_body %}{% endblock %}
 </header>
 <div id="body">

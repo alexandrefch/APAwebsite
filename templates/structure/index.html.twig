@@ -3,43 +3,33 @@
 {% block title %}Structure index{% endblock %}
 
 {% block body %}
-    <h1>Structure index</h1>
+    <section>
+        <div>
+            {% for structure in structures %}
+                {% embed "structure/list_item.twig" %}
+                    {% block link %}
+                        {{ path('structure_show', {'id': structure.id}) }}
+                    {% endblock %}
+                    {% block title %}
+                        {{ structure.name }}
+                    {% endblock %}
+                    {% block desc %}
+                        {{ structure.address }}
+                    {% endblock %}
+                    {% block action %}
+                        <a class="primary" href="{{ path('structure_edit', {'id': structure.id}) }}">
+                            Editer
+                        </a>
+                        <a class="danger" href="{{ path('structure_edit', {'id': structure.id}) }}">
+                            Supprimer
+                        </a>
+                    {% endblock %}
+                {% endembed %}
+            {% else %}
+                Pas de structures
+            {% endfor %}
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>PhoneNumber</th>
-                <th>Url</th>
-                <th>Description</th>
-                <th>Address</th>
-                <th>Lat</th>
-                <th>Lng</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for structure in structures %}
-            <tr>
-                <td>{{ structure.id }}</td>
-                <td>{{ structure.phoneNumber }}</td>
-                <td>{{ structure.url }}</td>
-                <td>{{ structure.description }}</td>
-                <td>{{ structure.address }}</td>
-                <td>{{ structure.lat }}</td>
-                <td>{{ structure.lng }}</td>
-                <td>
-                    <a href="{{ path('structure_show', {'id': structure.id}) }}">show</a>
-                    <a href="{{ path('structure_edit', {'id': structure.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('structure_new') }}">Create new</a>
+        <a class="float_bottomRight" href="{{ path('structure_new') }}">+ Ajouter une structure</a>
+    </section>
 {% endblock %}
