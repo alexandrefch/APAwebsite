@@ -3,11 +3,33 @@
 {% block title %}Edit Structure{% endblock %}
 
 {% block body %}
-    <h1>Edit Structure</h1>
+    <section>
 
-    {{ include('structure/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ form_start(form, {'attr': {'id': 'form'}}) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.type) }}
+            {{ form_row(form.phoneNumber) }}
+            {{ form_row(form.url) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.address) }}
+            {{ form_row(form.lat) }}
+            {{ form_row(form.lng) }}
+            {{ form_row(form._token) }}
+        {{ form_end(form) }}
 
-    <a href="{{ path('structure_index') }}">back to list</a>
-
-    {{ include('structure/_delete_form.html.twig') }}
+        <div class="button-footer">
+            <div>
+                <a class="btn btn-normal" href="{{ path('structure_index') }}">Retour à la liste</a>
+            </div>
+            <div class="right">
+                <button id="btn-save" class="btn btn-success">Sauvegarder</button>
+                {{ include('structure/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </section>
+    <script>
+        let btnSave = document.getElementById('btn-save');
+        let form = document.getElementById('form');
+        btnSave.addEventListener('click',function(){form.submit();});
+    </script>
 {% endblock %}

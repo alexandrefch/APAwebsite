@@ -29,10 +29,11 @@
             </div>
             <div id="navbar-overlay"></div>
             <div id="navbar-panel">
-                {% if is_granted('ROLE_CONTRIBUTOR') %}
+                {% if is_granted('ROLE_ADMIN') %}
                     <div>
-                        <label>Intervenant</label>
-                        <a href="{{ path('my_structure') }}">Mes structures</a>
+                        <label>Administration</label>
+                        <a href="{{ path('structure_index') }}">Structures</a>
+                        <a href="{{ path('account_index') }}">Comptes</a>
                     </div>
                 {% endif %}
             </div>

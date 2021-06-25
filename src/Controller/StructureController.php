@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/structure")
+ * @Route("/admin/structure")
  */
 class StructureController extends AbstractController
 {
@@ -68,10 +68,9 @@ class StructureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('structure_index');
         }
 
+        $form = $this->createForm(StructureType::class, $structure);
         return $this->render('structure/edit.html.twig', [
             'structure' => $structure,
             'form' => $form->createView(),

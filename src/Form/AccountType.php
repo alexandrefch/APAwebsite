@@ -2,31 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Structure;
+use App\Entity\Account;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class StructureType extends AbstractType
+class AccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('phoneNumber')
-            ->add('url')
-            ->add('description')
-            ->add('address')
-            ->add('lat')
-            ->add('lng')
-            ->add('type')
+            ->add('email')
+            ->add('roles')
+            ->add('password')
+            ->add('person')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Structure::class,
+            'data_class' => Account::class,
         ]);
     }
 }

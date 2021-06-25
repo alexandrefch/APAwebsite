@@ -1,32 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Structure index{% endblock %}
+{% block title %}Account index{% endblock %}
 
 {% block body %}
     <section>
         <div>
-            {% for structure in structures %}
+            {% for account in accounts %}
                 {% embed "list_item.twig" %}
                     {% block link %}
-                        {{ path('structure_show', {'id': structure.id}) }}
+                        {{ path('account_show', {'id': account.id}) }}
                     {% endblock %}
                     {% block title %}
-                        {{ structure.name }}
+                        {{ account.getPerson().firstName ~ " " ~ account.getPerson().lastName }}
                     {% endblock %}
                     {% block desc %}
-                        {{ structure.address }}
+                        {{ account.email }}
                     {% endblock %}
                     {% block action %}
-                        <a class="primary" href="{{ path('structure_edit', {'id': structure.id}) }}">
+                        <a class="primary" href="{{ path('account_edit', {'id': account.id}) }}">
                             Éditer
                         </a>
                     {% endblock %}
                 {% endembed %}
-            {% else %}
-                Pas de structures
             {% endfor %}
         </div>
-
-        <a class="float_bottomRight" href="{{ path('structure_new') }}">+ Ajouter une structure</a>
-    </section>
+     </section>
 {% endblock %}

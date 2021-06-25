@@ -18,13 +18,19 @@
 {% endblock %}
 
 {% block body %}
-    <section id="stat-panel">
-        <h2>Papa c'est ...</h2>
-        {% for stat in stats %}
-            <div class="stat">
-                <h3>{{ stat['value'] }}</h3>
-                <p>{{ stat['desc'] }}</p>
-            </div>
-        {% endfor %}
-    </section>
+    {% if app.user == null %}
+        <section id="stat-panel">
+            <h2>Papa c'est</h2>
+            {% for stat in stats %}
+                <div class="stat">
+                    <h3>{{ stat['value'] }}</h3>
+                    <p>{{ stat['desc'] }}</p>
+                </div>
+            {% endfor %}
+        </section>
+    {% else %}
+        <section>
+            {% include 'calendar.twig' %}
+        </section>
+    {% endif %}
 {% endblock %}

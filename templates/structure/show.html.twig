@@ -3,10 +3,12 @@
 {% block title %}Structure{% endblock %}
 
 {% block body %}
-    <h1>Structure</h1>
+    <section>
 
-    <table class="table">
-        <tbody>
+        <h1>Structure</h1>
+
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ structure.id }}</td>
@@ -35,12 +37,16 @@
                 <th>Lng</th>
                 <td>{{ structure.lng }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <a href="{{ path('structure_index') }}">back to list</a>
-
-    <a href="{{ path('structure_edit', {'id': structure.id}) }}">edit</a>
-
-    {{ include('structure/_delete_form.html.twig') }}
+        <div class="button-footer">
+            <div>
+                <a class="btn btn-normal" href="{{ path('structure_index') }}">Retour à la liste</a>
+            </div>
+            <div>
+                <button id="btn-save" class="btn btn-normal">Éditer</button>
+            </div>
+        </div>
+    </section>
 {% endblock %}

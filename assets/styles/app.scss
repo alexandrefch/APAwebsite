@@ -73,7 +73,7 @@ body {
     }
 }
 
-form {
+form:not(.delete-form) {
     .form-group {
         label {
             display: block;
@@ -137,6 +137,16 @@ textarea:focus, input:focus{
     color:$color_background;
 }
 
+.btn-danger{
+    background-color: $color_danger;
+    color:$color_background;
+}
+
+.btn-success{
+    background-color: $color_success;
+    color:$color_background;
+}
+
 .link {
     color: $color_highlight;
     text-decoration: none;
@@ -180,4 +190,17 @@ textarea:focus, input:focus{
 a{
     color: inherit;
     text-decoration: none;
+    display: block;
+    width: max-content;
+}
+
+.button-footer{
+    display: flex;
+    justify-content: space-between;
+    .right{
+        display: flex;
+        &>* {
+            margin-left: 0.5rem;
+        }
+    }
 }
