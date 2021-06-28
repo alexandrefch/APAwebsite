@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Structure;
 use App\Form\StructureType;
+use App\Repository\ActivityRepository;
 use App\Repository\StructureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,6 +74,7 @@ class StructureController extends AbstractController
         $form = $this->createForm(StructureType::class, $structure);
         return $this->render('structure/edit.html.twig', [
             'structure' => $structure,
+            'activities' => $structure->getActivities(),
             'form' => $form->createView(),
         ]);
     }

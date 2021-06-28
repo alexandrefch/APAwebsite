@@ -1,4 +1,5 @@
 @import "colors";
+@import "~bootstrap/scss/bootstrap";
 
 * {
     padding: 0;
@@ -121,32 +122,6 @@ textarea:focus, input:focus{
     width: 100%;
 }
 
-.btn {
-    padding: 0.4em 0.5em;
-    font-size: 1.1em;
-    border: none;
-    border-radius: 0.3em;
-}
-
-.btn:hover {
-    cursor: pointer;
-}
-
-.btn-normal{
-    background-color: $color_main;
-    color:$color_background;
-}
-
-.btn-danger{
-    background-color: $color_danger;
-    color:$color_background;
-}
-
-.btn-success{
-    background-color: $color_success;
-    color:$color_background;
-}
-
 .link {
     color: $color_highlight;
     text-decoration: none;
@@ -195,12 +170,43 @@ a{
 }
 
 .button-footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     .right{
         display: flex;
         &>* {
             margin-left: 0.5rem;
+        }
+    }
+}
+
+.opacity60{
+    opacity: 60%;
+}
+
+.btn-icon{
+    display: flex;
+    align-items: center;
+    svg{
+        fill: white;
+        width: 25px;
+        height: 25px;
+        margin-right: 0.5rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .btn-icon{
+        svg{
+            margin-right: 0;
+        }
+        span{
+            display: none;
         }
     }
 }

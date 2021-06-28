@@ -3,9 +3,22 @@
 {% block title %}New Structure{% endblock %}
 
 {% block body %}
-    <h1>Create new Structure</h1>
+    <section>
+        {{ form_start(form, {'attr': {'id': 'form'}}) }}
+        {{ form_end(form) }}
 
-    {{ include('structure/_form.html.twig') }}
-
-    <a href="{{ path('structure_index') }}">back to list</a>
+        <div class="button-footer">
+            <div>
+                <a class="btn btn-primary" href="{{ path('structure_index') }}">Retour à la liste</a>
+            </div>
+            <div class="right">
+                <button id="btn-save" class="btn btn-success">Créer</button>
+            </div>
+        </div>
+        <script>
+            let btnSave = document.getElementById('btn-save');
+            let form = document.getElementById('form');
+            btnSave.addEventListener('click',function(){form.submit();});
+        </script>
+    </section>
 {% endblock %}

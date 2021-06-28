@@ -4,29 +4,24 @@
 
 {% block body %}
     <section>
-        <div>
+        <div class="row">
             {% for structure in structures %}
-                {% embed "list_item.twig" %}
-                    {% block link %}
-                        {{ path('structure_show', {'id': structure.id}) }}
-                    {% endblock %}
-                    {% block title %}
-                        {{ structure.name }}
-                    {% endblock %}
-                    {% block desc %}
-                        {{ structure.address }}
-                    {% endblock %}
-                    {% block action %}
-                        <a class="primary" href="{{ path('structure_edit', {'id': structure.id}) }}">
-                            Éditer
+                <div class="card mb-3">
+                    <div class="card-body row">
+                        <a href="{{ path('structure_show', {'id': structure.id}) }}" class="col-10">
+                            <h5 class="card-title">{{ structure.name }}</h5>
+                            <p class="card-text">{{ structure.address }}</p>
                         </a>
-                    {% endblock %}
-                {% endembed %}
+                        <div class="col-2 d-flex justify-content-center align-items-center">
+                            <a class="btn btn-primary" role="button" href="{{ path('structure_edit', {'id': structure.id}) }}">Éditer</a>
+                        </div>
+                    </div>
+                </div>
             {% else %}
                 Pas de structures
             {% endfor %}
         </div>
 
-        <a class="float_bottomRight" href="{{ path('structure_new') }}">+ Ajouter une structure</a>
+        <a class="fixed_br btn btn-success" href="{{ path('structure_new') }}">+ Ajouter une structure</a>
     </section>
 {% endblock %}

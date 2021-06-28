@@ -43,9 +43,21 @@
         </div>
         <div id="navbar-account">
             {% if app.user == null %}
-                <a href="{{ path('app_authenticate') }}">Se connecter</a>
+                <a href="{{ path('app_authenticate') }}">
+                    {% include 'icon/avatar.svg' %}
+                    <div>
+                        <div>Se connecter</div>
+                        <div class="opacity60">Gérer mon agenda</div>
+                    </div>
+                </a>
             {% else %}
-                <a href="{{ path('app_logout') }}">Déconnexion</a>
+                <a href="{{ path('app_authenticate') }}">
+                    {% include 'icon/avatar.svg' %}
+                    <div>
+                        <div>Mon profil</div>
+                        <div class="opacity60">Gérer mon agenda</div>
+                    </div>
+                </a>
             {% endif %}
         </div>
     </nav>

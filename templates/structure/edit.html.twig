@@ -4,29 +4,43 @@
 
 {% block body %}
     <section>
-
         {{ form_start(form, {'attr': {'id': 'form'}}) }}
-            {{ form_row(form.name) }}
-            {{ form_row(form.type) }}
-            {{ form_row(form.phoneNumber) }}
-            {{ form_row(form.url) }}
-            {{ form_row(form.description) }}
-            {{ form_row(form.address) }}
-            {{ form_row(form.lat) }}
-            {{ form_row(form.lng) }}
-            {{ form_row(form._token) }}
         {{ form_end(form) }}
-
-        <div class="button-footer">
-            <div>
-                <a class="btn btn-normal" href="{{ path('structure_index') }}">Retour à la liste</a>
-            </div>
-            <div class="right">
-                <button id="btn-save" class="btn btn-success">Sauvegarder</button>
-                {{ include('structure/_delete_form.html.twig') }}
-            </div>
+    </section>
+    <section>
+        <div class="row">
+            {% for activity in activities %}
+                <div class="card mb-3">
+                    <div class="card-body row">
+                        <a href="{{ path('activity_show', {'id': activity.id}) }}" class="col-10">
+                            <h5 class="card-title">{{ activity.getDiscipline().getName() }}</h5>
+                            <p class="card-text"></p>
+                        </a>
+                        <div class="col-2 d-flex justify-content-center align-items-center">
+                            <a class="btn btn-primary" role="button" href="{{ path('activity_edit', {'id': activity.id}) }}">Éditer</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                Pas de structures
+            {% endfor %}
         </div>
     </section>
+    <div class="button-footer">
+        <div>
+            <a class="btn btn-icon btn-primary" href="{{ path('structure_index') }}">
+                {% include 'icon/undo.svg' %}
+                <span>Retour à la liste</span>
+            </a>
+        </div>
+        <div class="right">
+            <button id="btn-save" class="btn btn-icon btn-success">
+                {% include 'icon/diskette.svg' %}
+                <span>Sauvegarder</span>
+            </button>
+            {{ include('structure/_delete_form.html.twig') }}
+        </div>
+    </div>
     <script>
         let btnSave = document.getElementById('btn-save');
         let form = document.getElementById('form');

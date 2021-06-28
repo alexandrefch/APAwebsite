@@ -53,6 +53,8 @@ section{
 }
 
 header{
+    position: relative;
+
     background-color: $color_main;
     nav{
         $icon_size: 30px;
@@ -62,7 +64,7 @@ header{
         grid-auto-flow: column;
         align-items: center;
         color: white;
-        padding: 0.5rem 1.5rem;
+        padding: 0.8rem 1.7rem;
 
         #navbar-link {
             #navbar-menu-icon {
@@ -131,12 +133,30 @@ header{
 
         #navbar-account {
             a {
-                color: white;
+                display: flex;
                 margin-left: auto;
-                text-decoration: none;
-                font-weight: bold;
-                font-size: 0.85rem;
+                justify-content: center;
+                align-items: center;
+                font-size: 0.9rem;
+                svg{
+                    width: 25px;
+                    height: 25px;
+                    fill: white;
+                    margin-right: 0.7rem;
+                }
             }
+        }
+    }
+    #bottom-wave{
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        svg{
+            position: absolute;
+            fill: $color_main;
+            min-width: 800px;
+            width: 100%;
+            transform: scaleY(0.4) translateY(-80%)
         }
     }
 }
@@ -161,68 +181,10 @@ header{
     }
 }
 
-footer{
-
-}
-
-.item_list{
-    display: flex;
-    padding: 1rem;
-    margin-bottom: 0.6rem;
-    border-radius: 4px;
-    background-color: white;
-    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.35);
-    -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.35);
-    box-shadow: 0 0 3px 0 rgba(0,0,0,0.35);
-    .body{
-        display: block;
-        flex-grow: 1;
-        color: black;
-        text-decoration: none;
-        h3{
-            margin-bottom: 0.5rem;
-        }
-        p{
-            font-size: 0.9rem;
-        }
-    }
-    .action{
-        display: flex;
-        align-items: center;
-        a{
-            display: block;
-            border-radius: 4px;
-            padding: 0.3rem;
-            margin-left: 0.5rem;
-            color: white;
-
-            svg{
-                width: 100%;
-                height: 100%;
-            }
-            transition: all 100ms ease-in-out;
-        }
-        .danger{
-            background-color: #dc3545;
-        }
-        .primary{
-            background-color: #007bff;
-        }
-    }
-}
-
-.item_list:hover{
-    cursor: pointer;
-}
-
-.float_bottomRight{
+.fixed_br{
     position: fixed;
     bottom: 1rem;
     right: 1rem;
-    background-color: #28a745;
-    padding: 0.5rem;
-    color: white;
-    border-radius: 8px;
 }
 
 @media (max-width: 600px) {
