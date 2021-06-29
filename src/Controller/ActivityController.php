@@ -26,9 +26,9 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="activity_new", methods={"GET","POST"})
+     * @Route("/{structure_id}/new", name="activity_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, int $structure_id): Response
     {
         $activity = new Activity();
         $form = $this->createForm(ActivityType::class, $activity);
@@ -45,6 +45,7 @@ class ActivityController extends AbstractController
         return $this->render('activity/new.html.twig', [
             'activity' => $activity,
             'form' => $form->createView(),
+            'structure_id' => $structure_id,
         ]);
     }
 
@@ -59,9 +60,9 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="activity_edit", methods={"GET","POST"})
+     * @Route("/{structure_id}/{id}/edit", name="activity_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Activity $activity): Response
+    public function edit(Request $request, Activity $activity, int $structure_id): Response
     {
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
@@ -75,6 +76,7 @@ class ActivityController extends AbstractController
         return $this->render('activity/edit.html.twig', [
             'activity' => $activity,
             'form' => $form->createView(),
+            'structure_id' => $structure_id,
         ]);
     }
 

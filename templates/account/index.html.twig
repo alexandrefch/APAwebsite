@@ -4,25 +4,22 @@
 
 {% block body %}
     <section>
-        <div>
+        <div class="row">
             {% for account in accounts %}
-                {% embed "list_item.twig" %}
-                    {% block link %}
-                        {{ path('account_show', {'id': account.id}) }}
-                    {% endblock %}
-                    {% block title %}
-                        {{ account.getPerson().firstName ~ " " ~ account.getPerson().lastName }}
-                    {% endblock %}
-                    {% block desc %}
-                        {{ account.email }}
-                    {% endblock %}
-                    {% block action %}
-                        <a class="primary" href="{{ path('account_edit', {'id': account.id}) }}">
-                            Éditer
+                <div class="card mb-3">
+                    <div class="card-body d-flex">
+                        <a href=" {{ path('account_show', {'id': account.id}) }}" class="flex-grow-1">
+                            <h5 class="card-title">{{ account.getPerson().firstName ~ " " ~ account.getPerson().lastName }}</h5>
+                            <p class="card-text">{{ account.email }}</p>
                         </a>
-                    {% endblock %}
-                {% endembed %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <div class="flex-shrink-0 d-flex justify-content-center align-items-center">
+                                <a class="btn btn-primary" role="button" href="{{ path('account_edit', {'id': account.id}) }}">Éditer</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
             {% endfor %}
         </div>
-     </section>
+    </section>
 {% endblock %}

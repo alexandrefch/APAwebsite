@@ -3,9 +3,29 @@
 {% block title %}New Activity{% endblock %}
 
 {% block body %}
-    <h1>Create new Activity</h1>
-
-    {{ include('activity/_form.html.twig') }}
-
-    <a href="{{ path('activity_index') }}">back to list</a>
+    <section>
+        {{ form_start(form, {'attr': {'id': 'form'}}) }}
+        {{ form_end(form) }}
+    </section>
+    <div class="button-footer">
+        <div class="fixed-bar">
+            <div>
+                <a class="btn btn-primary btn-icon" href="{{ path('structure_edit',{'id': structure_id}) }}">
+                    {% include 'icon/undo.svg' %}
+                    <span>Retour à la structure</span>
+                </a>
+            </div>
+            <div>
+                <button id="btn-save" class="btn btn-icon btn-success h-min-content">
+                    {% include 'icon/diskette.svg' %}
+                    <span>Créer</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let btnSave = document.getElementById('btn-save');
+        let form = document.getElementById('form');
+        btnSave.addEventListener('click',function(){form.submit();});
+    </script>
 {% endblock %}
