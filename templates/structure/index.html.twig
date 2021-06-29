@@ -24,6 +24,7 @@
             {% endfor %}
         </div>
     </section>
+    {% if is_granted('ROLE_ADMIN') %}
     <div class="button-footer">
         <div class="fixed-bar">
             <div>
@@ -36,4 +37,5 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endblock %}

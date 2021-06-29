@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AccountRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -39,6 +41,16 @@ class Account implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $person;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Prescription::class, mappedBy="patient")
+     */
+    private $prescriptions;
+
+    public function __construct()
+    {
+        $this->prescriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -131,5 +143,35 @@ class Account implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Prescription[]
+     */
+    public function getPrescriptions(): Collection
+    {
+        return $this->prescriptions;
+    }
+
+    public function addGoal(Prescription $goal): self
+    {
+        if (!$this->prescriptions->contains($goal)) {
+            $this->prescriptions[] = $goal;
+            $goal->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGoal(Prescription $goal): self
+    {
+        if ($this->prescriptions->removeElement($goal)) {
+            // set the owning side to null (unless already changed)
+            if ($goal->getPatient() === $this) {
+                $goal->setPatient(null);
+            }
+        }
+
+        return $this;
     }
 }

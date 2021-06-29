@@ -1,36 +1,48 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 
-{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('home') }}
+    {% block stylesheets %}
 
-{% endblock %}
+    {% endblock %}
 
-{% block head_body %}
-    <section>
-        <div class="searchbar">
-            <label class="input">
-                <input type="text">
-            </label>
-            <div class="glass-icon">
-                {% include 'icon/loupe.svg' %}
-            </div>
+    {% block javascripts %}
+    {% endblock %}
+</head>
+<body>
+<div id="navbar">
+    <img src="{{ asset('images/univ-tours.png') }}" alt="logo univ-tours">
+    <div>
+        <a class="btn btn-main" href="{{ path('app_authenticate') }}">Se connecter </a>
+    </div>
+</div>
+<section class="home row">
+    <div class="col-xl-5 col-md">
+        <div>
+            <h1>Projet APA</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dignissim eros ligula, ut eleifend orci
+                cursus a. Aenean nec sem accumsan, dapibus tellus nec, accumsan erat. Suspendisse ac eros ac eros luctus
+                pretium. Suspendisse viverra dolor eget elit suscipit venenatis.
+            </p>
+            <a class="btn btn-main slide-in-bottom">Accèder à mon planning</a>
         </div>
-    </section>
-{% endblock %}
-
-{% block body %}
-    {% if app.user == null %}
-        <section id="stat-panel">
-            <h2>Papa c'est</h2>
-            {% for stat in stats %}
-                <div class="stat">
-                    <h3>{{ stat['value'] }}</h3>
-                    <p>{{ stat['desc'] }}</p>
-                </div>
-            {% endfor %}
-        </section>
-    {% else %}
-        <section>
-            {% include 'calendar.twig' %}
-        </section>
-    {% endif %}
-{% endblock %}
+    </div>
+    <div class="col-xl-7 col-md">
+        <div class="picture slide-in-right">
+            {% include 'icon/sport_trainer.svg' %}
+        </div>
+    </div>
+</section>
+</body>
+</html>
