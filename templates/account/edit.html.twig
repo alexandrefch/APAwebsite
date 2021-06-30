@@ -3,11 +3,25 @@
 {% block title %}Edit Account{% endblock %}
 
 {% block body %}
-    <h1>Edit Account</h1>
+    <section>
+        {{ form_start(form, {'attr': {'id': 'form'}}) }}
+            {{ form_row(form.roles) }}
+            {{ form_row(form._token) }}
+        {{ form_end(form) }}
 
-    {{ include('account/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('account_index') }}">back to list</a>
-
-    {{ include('account/_delete_form.html.twig') }}
+        <div class="button-footer">
+            <div>
+                <a class="btn btn-normal" href="{{ path('account_index') }}">Retour à la liste</a>
+            </div>
+            <div class="right">
+                <button id="btn-save" class="btn btn-success">Sauvegarder</button>
+                {{ include('account/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </section>
+    <script>
+        let btnSave = document.getElementById('btn-save');
+        let form = document.getElementById('form');
+        btnSave.addEventListener('click',function(){form.submit();});
+    </script>
 {% endblock %}

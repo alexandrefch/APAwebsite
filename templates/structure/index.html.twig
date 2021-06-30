@@ -3,7 +3,14 @@
 {% block title %}Structure index{% endblock %}
 
 {% block body %}
-    <section>
+    <section class="content">
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="row mb-3">
+                <a class="btn btn-full btn-main" href="{{ path('structure_new') }}">
+                    <span>Ajouter une structure</span>
+                </a>
+            </div>
+        {% endif %}
         <div class="row">
             {% for structure in structures %}
                 <div class="card mb-3">
@@ -13,9 +20,9 @@
                             <p class="card-text">{{ structure.address }}</p>
                         </a>
                         {% if is_granted('ROLE_ADMIN') %}
-                        <div class="flex-shrink-0 d-flex justify-content-center align-items-center">
-                            <a class="btn btn-primary" role="button" href="{{ path('structure_edit', {'id': structure.id}) }}">Éditer</a>
-                        </div>
+                            <div class="flex-shrink-0 d-flex justify-content-center align-items-center">
+                                <a class="btn btn-primary" role="button" href="{{ path('structure_edit', {'id': structure.id}) }}">Éditer</a>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
@@ -24,15 +31,4 @@
             {% endfor %}
         </div>
     </section>
-    {% if is_granted('ROLE_ADMIN') %}+
-        <div class="navbar bottom">
-            <div></div>
-            <div>
-                <a class="btn-sm btn-icon btn-main" href="{{ path('structure_new') }}">
-                    {% include 'icon/plus.svg' %}
-                    <span>Ajouter une structure</span>
-                </a>
-            </div>
-        </div>
-    {% endif %}
 {% endblock %}

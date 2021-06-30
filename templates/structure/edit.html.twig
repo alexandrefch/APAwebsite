@@ -3,14 +3,29 @@
 {% block title %}Edit Structure{% endblock %}
 
 {% block body %}
-    <section>
-        <h3 class="mb-4">Information sur la structure</h3>
-        {{ form_start(form, {'attr': {'id': 'form'}}) }}
-        {{ form_end(form) }}
-    </section>
-    <section>
-        <h3 class="mb-4">Liste des activités</h3>
-        <div class="row">
+    <div class="content">
+        <section class="panel shadow-sm">
+            <h3 class="mb-4">Information sur la structure</h3>
+            {{ form_start(form, {'attr': {'id': 'form'}}) }}
+            {{ form_end(form) }}
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a class="btn btn-icon btn-primary" href="{{ path('structure_index') }}">
+                        {% include 'icon/undo.svg' %}
+                        <span>Retour à la liste</span>
+                    </a>
+                </div>
+                <div class="d-grid gap-2 grid-flow-column">
+                    <button id="btn-save" class="btn btn-icon btn-success">
+                        {% include 'icon/diskette.svg' %}
+                        <span>Sauvegarder</span>
+                    </button>
+                    {{ include('structure/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </section>
+        <section class="panel shadow-sm">
+            <h3 class="mb-4">Liste des activités</h3>
             {% for activity in activities %}
                 <div class="card mb-3">
                     <div class="card-body d-flex">
@@ -25,25 +40,8 @@
             {% else %}
                 Pas de structures
             {% endfor %}
-            <a class="btn btn-success" href="{{ path('activity_new',{'structure_id':structure.id}) }}">Ajouter une activité</a>
-        </div>
-    </section>
-    <div class="button-footer">
-        <div class="fixed-bar">
-            <div>
-                <a class="btn btn-icon btn-primary" href="{{ path('structure_index') }}">
-                    {% include 'icon/undo.svg' %}
-                    <span>Retour à la liste</span>
-                </a>
-            </div>
-            <div>
-                <button id="btn-save" class="btn btn-icon btn-success h-min-content">
-                    {% include 'icon/diskette.svg' %}
-                    <span>Sauvegarder</span>
-                </button>
-                {{ include('structure/_delete_form.html.twig') }}
-            </div>
-        </div>
+            <a class="btn btn-success btn-full" href="{{ path('activity_new',{'structure_id':structure.id}) }}">Ajouter une activité</a>
+        </section>
     </div>
     <script>
         let btnSave = document.getElementById('btn-save');

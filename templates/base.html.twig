@@ -21,20 +21,59 @@
     {% endblock %}
 </head>
 <body>
-<div class="navbar">
-    <a href="{{ path('home') }}">
-        <img src="{{ asset('images/univ-tours.png') }}" alt="logo univ-tours">
-    </a>
-    <div>
-        <a class="btn" href="{{ path('structure_index') }}">Structures</a>
-        <a class="btn" href="{{ path('activity_index') }}">Activités</a>
-        {% if app.user == null %}
-            <a class="btn btn-main" href="{{ path('app_authenticate') }}">Se connecter</a>
-        {% else %}
-            <a class="btn btn-main" href="{{ path('account_profile') }}">Mon profil</a>
-        {% endif %}
+<div id="navbar">
+    <div class="body">
+        <a href="{{ path('home') }}">
+            <img src="{{ asset('images/univ-tours.png') }}" alt="logo univ-tours">
+        </a>
+        <div class="d-flex">
+            <div id="nav-overlay"></div>
+            <div id="nav-links">
+                <a class="btn" href="{{ path('structure_index') }}">Structures</a>
+                <a class="btn" href="{{ path('activity_index') }}">Activités</a>
+                {% if is_granted('ROLE_DOCTOR') %}
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div>Administration</div>
+                    <a class="btn" href="{{ path('account_index') }}">Gestion des comptes</a>
+                {% endif %}
+            </div>
+            {% if app.user == null %}
+                <a class="btn btn-main" href="{{ path('app_authenticate') }}">Se connecter</a>
+            {% else %}
+                <a class="btn btn-main" href="{{ path('account_profile') }}">Mon profil</a>
+            {% endif %}
+            <div id="navbar-menu-icon">
+                {% include 'icon/menu.svg' %}
+            </div>
+        </div>
     </div>
 </div>
 {% block body %}{% endblock %}
 </body>
+<script defer type="application/javascript">
+    class NavBar {
+        static #navLinks;
+        static #navOverlay;
+        static Instantiate(){
+            NavBar.#navLinks = document.getElementById('nav-links');
+            NavBar.#navOverlay = document.getElementById('nav-overlay');
+            NavBar.#navOverlay.addEventListener('click',function (){
+                NavBar.Update(false);
+            });
+            let btn_menu = document.getElementById('navbar-menu-icon');
+            btn_menu.addEventListener('click', function (){
+                NavBar.Update(true);
+            });
+        }
+
+        static Update(statut){
+            let width = NavBar.#navLinks.style.width;
+            NavBar.#navLinks.style.right = (statut)?"0px":width;
+            NavBar.#navOverlay.style.display = (statut)?"block":"none";
+        }
+    }
+
+    NavBar.Instantiate();
+</script>
 </html>

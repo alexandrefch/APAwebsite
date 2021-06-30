@@ -13,7 +13,7 @@
 <body>
 <div id="authenticationPane" class="vh-100 vw-100">
     <div id="accessPane" class="flexCentered">
-        <div class="panel shadow">
+        <div class="shadow">
             <div class="header">
                 <div id="loginTab" class="tab active" onclick="openLoginPanel()">Connexion</div>
                 <div id="registerTab" class="tab" onclick="openRegisterPanel()">Inscription</div>
@@ -23,7 +23,7 @@
                     {% include 'security/loginForm.twig' %}
                     <span class="link center mt" onclick="openRegisterPanel()">Pas encore inscrit ?</span>
                 </div>
-                <div id="registerForm" class="hide">
+                <div id="registerForm" class="d-none">
                     {% include 'security/registerForm.twig' %}
                     <span class="link center mt" onclick="openLoginPanel()">Déjà inscrit ?</span>
                 </div>
@@ -39,14 +39,14 @@
 </div>
 <script type="application/javascript">
     function openLoginPanel(){
-        document.getElementById('loginForm').classList.remove('hide');
-        document.getElementById('registerForm').classList.add('hide');
+        document.getElementById('loginForm').classList.remove('d-none');
+        document.getElementById('registerForm').classList.add('d-none');
         document.getElementById('loginTab').classList.add('active');
         document.getElementById('registerTab').classList.remove('active');
     }
     function openRegisterPanel(){
-        document.getElementById('loginForm').classList.add('hide');
-        document.getElementById('registerForm').classList.remove('hide');
+        document.getElementById('loginForm').classList.add('d-none');
+        document.getElementById('registerForm').classList.remove('d-none');
         document.getElementById('loginTab').classList.remove('active');
         document.getElementById('registerTab').classList.add('active');
     }

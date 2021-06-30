@@ -82,6 +82,7 @@ class SecurityController extends AbstractController
             $person = new Person();
             $person->setFirstName($form->get('firstName')->getData());
             $person->setLastName($form->get('lastName')->getData());
+            $person->setPhoneNumber($form->get('phoneNumber')->getData());
 
             $account->setPerson($person);
 

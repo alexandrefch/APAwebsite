@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prescription{% endblock %}
+
+{% block body %}
+    <h1>Prescription</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ prescription.id }}</td>
+            </tr>
+            <tr>
+                <th>Goal</th>
+                <td>{{ prescription.goal }}</td>
+            </tr>
+            <tr>
+                <th>Creation_date</th>
+                <td>{{ prescription.creationDate ? prescription.creationDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ prescription.duration }}</td>
+            </tr>
+            <tr>
+                <th>Min_time_sport_week</th>
+                <td>{{ prescription.minTimeSportWeek }}</td>
+            </tr>
+            <tr>
+                <th>Max_time_sport_week</th>
+                <td>{{ prescription.maxTimeSportWeek }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('prescription_index') }}">back to list</a>
+
+    <a href="{{ path('prescription_edit', {'id': prescription.id}) }}">edit</a>
+
+    {{ include('prescription/_delete_form.html.twig') }}
+{% endblock %}

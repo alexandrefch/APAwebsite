@@ -1,4 +1,4 @@
-@import "colors";
+@import "variables";
 
 #authenticationPane {
     display: grid;
@@ -7,14 +7,50 @@
     #accessPane {
         position: relative;
 
-        .panel {
+        &>div {
             max-width: 340px;
             width: 100%;
             display: flex;
             flex-direction: column;
-
-            .body {
+            background-color: $color_lightGray;
+            border-radius: 1rem;
+            padding: 0;
+            .header{
+                display: flex;
+                justify-content: space-evenly;
+                .tab {
+                    position: relative;
+                    padding: 1em;
+                    font-weight: 700;
+                    color: $color_gray;
+                }
+                .tab.active {
+                    color: $color_text;
+                }
+                .tab.active::after{
+                    position: absolute;
+                    display: block;
+                    content: "";
+                    background-color: $color_main;
+                    min-width: 50%;
+                    min-height: 3px;
+                    border-radius: 1em 1em 0 0;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+                .tab:hover{
+                    cursor: pointer;
+                }
+            }
+            .body{
                 flex-grow: 1;
+                background-color: white;
+                border-radius: 1em;
+                padding: 3em 3em 2em 3em;
+            }
+            .footer{
+                color: $color_gray;
             }
         }
 

@@ -3,32 +3,33 @@
 {% block title %}Account{% endblock %}
 
 {% block body %}
-    <h1>Account</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ account.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ account.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ account.roles ? account.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ account.password }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('account_index') }}">back to list</a>
-
-    <a href="{{ path('account_edit', {'id': account.id}) }}">edit</a>
-
-    {{ include('account/_delete_form.html.twig') }}
+    <section class="content">
+        <div class="panel shadow-sm">
+            <h5>Vos informations</h5>
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div>
+                        Prénom : {{ app.user.getPerson().firstName }}
+                    </div>
+                    <div>
+                        Nom de famille : {{ app.user.getPerson().lastName }}
+                    </div>
+                    <div>
+                        Téléphone : {{ app.user.getPerson().phoneNumber }}
+                    </div>
+                    <div>
+                        Email : {{ app.user.email }}
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                </div>
+            </div>
+        </div>
+        <div class="panel shadow-sm">
+            {% if app.user.getPrescriptions()|length > 0 %}
+            {% else %}
+                Vous n'avez encore pas reçu d'ordonnance
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}

@@ -39,6 +39,11 @@ class Person
      */
     private $participates;
 
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $phoneNumber;
+
     public function __construct()
     {
         $this->schedules = new ArrayCollection();
@@ -127,6 +132,18 @@ class Person
         if ($this->participates->removeElement($participate)) {
             $participate->removeParticipant($this);
         }
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }

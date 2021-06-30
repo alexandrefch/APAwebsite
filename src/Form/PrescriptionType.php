@@ -2,31 +2,32 @@
 
 namespace App\Form;
 
-use App\Entity\Account;
+use App\Entity\Prescription;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AccountType extends AbstractType
+class PrescriptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $roles = ['role1', 'role2', 'role3'];
-
         $builder
-            ->add('roles', ChoiceType::class, [
-                'choices' => $roles,
-                'multiple' => true,
-                'expanded' => true
-            ])
+            ->add('goal')
+            ->add('creation_date')
+            ->add('duration')
+            ->add('min_time_sport_week')
+            ->add('max_time_sport_week')
+            ->add('doctor')
+            ->add('patient')
+            ->add('contraindication')
+            ->add('cure')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Account::class,
+            'data_class' => Prescription::class,
         ]);
     }
 }
