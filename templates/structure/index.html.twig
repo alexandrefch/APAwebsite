@@ -24,18 +24,15 @@
             {% endfor %}
         </div>
     </section>
-    {% if is_granted('ROLE_ADMIN') %}
-    <div class="button-footer">
-        <div class="fixed-bar">
+    {% if is_granted('ROLE_ADMIN') %}+
+        <div class="navbar bottom">
+            <div></div>
             <div>
-            </div>
-            <div>
-                <a class="btn btn-icon btn-success" href="{{ path('structure_new') }}">
+                <a class="btn-sm btn-icon btn-main" href="{{ path('structure_new') }}">
                     {% include 'icon/plus.svg' %}
                     <span>Ajouter une structure</span>
                 </a>
             </div>
         </div>
-    </div>
     {% endif %}
 {% endblock %}

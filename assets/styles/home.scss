@@ -5,12 +5,6 @@
 
 $viewport_min_height: 800px;
 
-section {
-    width: 100%;
-    max-width: min(100%, 1400px);
-    margin: auto !important;
-}
-
 section.home {
     height: calc( 100vh - 4.4rem );
     padding: 1rem;
@@ -32,21 +26,31 @@ section.home {
     }
 }
 
-#navbar {
+.navbar{
     position: fixed;
     display: flex;
     justify-content: space-between;
     top: 0;
     left: 0;
     width: 100%;
+    height: min-content;
     padding: 1.2rem;
     background-color: rgba(255, 255, 255, 0.85);
     z-index: 1000;
     img{
         height: 2rem;
     }
+    *{
+        max-height: 2rem;
+        line-height: 1.2rem;
+    }
+}
+
+.navbar.bottom{
+    top: auto;
+    bottom: 0;
 }
 
 body{
-    padding-top: 4.4rem;
+    padding-top: 4.5rem;
 }

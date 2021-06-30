@@ -11,10 +11,7 @@
     {{ encore_entry_link_tags('authenticate') }}
 </head>
 <body>
-<div class="fullViewport autoColumn">
-    <div id="illustrationPane" class="flexCentered">
-        <img src="{{ asset('images/sport_illustration.svg') }}" alt="sport illustration">
-    </div>
+<div id="authenticationPane" class="vh-100 vw-100">
     <div id="accessPane" class="flexCentered">
         <div class="panel shadow">
             <div class="header">
@@ -30,6 +27,12 @@
                     {% include 'security/registerForm.twig' %}
                     <span class="link center mt" onclick="openLoginPanel()">Déjà inscrit ?</span>
                 </div>
+            </div>
+            <div class="footer">
+                <a class="btn btn-icon btn-normal" href="{{ path('home') }}">
+                    {% include 'icon/undo.svg' %}
+                    <span>Retour à l'accueil</span>
+                </a>
             </div>
         </div>
     </div>

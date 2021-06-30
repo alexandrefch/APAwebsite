@@ -21,71 +21,20 @@
     {% endblock %}
 </head>
 <body>
-<header>
-    <nav>
-        <div id="navbar-link">
-            <div id="navbar-menu-icon">
-                {% include 'icon/menu.svg' %}
-            </div>
-            <div id="navbar-overlay"></div>
-            <div id="navbar-panel">
-                {% if is_granted('ROLE_ADMIN') %}
-                    <div>
-                        <label>Administration</label>
-                        <a href="{{ path('structure_index') }}">Structures</a>
-                        <a href="{{ path('account_index') }}">Comptes</a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-        <div id="navbar-logo">
-            <a href="{{ path('home') }}">Papa</a>
-        </div>
-        <div id="navbar-account">
-            {% if app.user == null %}
-                <a href="{{ path('app_authenticate') }}">
-                    {% include 'icon/avatar.svg' %}
-                    <div>
-                        <div>Se connecter</div>
-                        <div class="opacity60">Gérer mon agenda</div>
-                    </div>
-                </a>
-            {% else %}
-                <a href="{{ path('account_profile') }}">
-                    {% include 'icon/avatar.svg' %}
-                    <div>
-                        <div>Mon profil</div>
-                        <div class="opacity60">Gérer mon agenda</div>
-                    </div>
-                </a>
-            {% endif %}
-        </div>
-    </nav>
-    {% block head_body %}{% endblock %}
-</header>
-<div id="body">
-    {% block body %}{% endblock %}
+<div class="navbar">
+    <a href="{{ path('home') }}">
+        <img src="{{ asset('images/univ-tours.png') }}" alt="logo univ-tours">
+    </a>
+    <div>
+        <a class="btn" href="{{ path('structure_index') }}">Structures</a>
+        <a class="btn" href="{{ path('activity_index') }}">Activités</a>
+        {% if app.user == null %}
+            <a class="btn btn-main" href="{{ path('app_authenticate') }}">Se connecter</a>
+        {% else %}
+            <a class="btn btn-main" href="{{ path('account_profile') }}">Mon profil</a>
+        {% endif %}
+    </div>
 </div>
-<footer>
-
-</footer>
-<script type="application/javascript">
-    let navbarOverlay = document.getElementById('navbar-overlay')
-    let navbarPanel = document.getElementById('navbar-panel')
-    let navbarIcon = document.getElementById('navbar-menu-icon')
-
-    navbarOverlay.addEventListener('click',function(){closeNavbar();})
-    navbarIcon.addEventListener('click',function(){openNavbar();})
-
-    function openNavbar(){
-        navbarOverlay.style.display = 'block';
-        navbarPanel.style.left = '0px';
-    }
-
-    function closeNavbar(){
-        navbarOverlay.style.display = 'none';
-        navbarPanel.style.left = '-250px';
-    }
-</script>
+{% block body %}{% endblock %}
 </body>
 </html>
