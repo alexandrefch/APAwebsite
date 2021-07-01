@@ -18,7 +18,7 @@ class PrescriptionType extends AbstractType
             ->add('min_time_sport_week')
             ->add('max_time_sport_week')
             ->add('doctor')
-            ->add('patient')
+            ->add('public')
             ->add('contraindication')
             ->add('cure')
         ;

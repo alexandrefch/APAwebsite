@@ -12,7 +12,7 @@ class AccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $roles = ['role1', 'role2', 'role3'];
+        $roles = ['Admin' => 'ROLE_ADMIN', 'Docteur' => 'ROLE_DOCTOR'];
 
         $builder
             ->add('roles', ChoiceType::class, [

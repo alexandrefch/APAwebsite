@@ -26,7 +26,7 @@ class Prescription
     private $doctor;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Account::class, inversedBy="goal")
+     * @ORM\ManyToOne(targetEntity=Account::class, inversedBy="prescriptions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $patient;

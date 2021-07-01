@@ -20,7 +20,7 @@ class PrescriptionController extends AbstractController
      */
     public function index(PrescriptionRepository $prescriptionRepository): Response
     {
-        return $this->render('prescription/index.html.twig', [
+        return $this->render('prescription/home.html.twig', [
             'prescriptions' => $prescriptionRepository->findAll(),
         ]);
     }

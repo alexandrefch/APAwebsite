@@ -3,19 +3,46 @@
 {% block title %}Edit Account{% endblock %}
 
 {% block body %}
-    <section>
-        {{ form_start(form, {'attr': {'id': 'form'}}) }}
+    <section class="content">
+        <div class="panel shadow-sm">
+            <h5>Informations</h5>
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div>
+                        Prénom : {{ app.user.getPerson().firstName }}
+                    </div>
+                    <div>
+                        Nom de famille : {{ app.user.getPerson().lastName }}
+                    </div>
+                    <div>
+                        Téléphone : {{ app.user.getPerson().phoneNumber }}
+                    </div>
+                    <div>
+                        Email : {{ app.user.email }}
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                </div>
+            </div>
+        </div>
+        <div class="panel shadow-sm">
+            {{ form_start(form, {'attr': {'id': 'form'}}) }}
             {{ form_row(form.roles) }}
             {{ form_row(form._token) }}
-        {{ form_end(form) }}
-
-        <div class="button-footer">
-            <div>
-                <a class="btn btn-normal" href="{{ path('account_index') }}">Retour à la liste</a>
-            </div>
-            <div class="right">
-                <button id="btn-save" class="btn btn-success">Sauvegarder</button>
-                {{ include('account/_delete_form.html.twig') }}
+            {{ form_end(form) }}
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a class="btn btn-icon btn-primary" href="{{ path('account_index') }}">
+                        {% include 'icon/undo.svg' %}
+                        <span>Retour à la liste</span>
+                    </a>
+                </div>
+                <div class="d-grid gap-2 grid-flow-column">
+                    <button id="btn-save" class="btn btn-icon btn-success">
+                        {% include 'icon/diskette.svg' %}
+                        <span>Sauvegarder</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>

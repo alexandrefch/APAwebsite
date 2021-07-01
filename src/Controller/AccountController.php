@@ -18,7 +18,7 @@ class AccountController extends AbstractController
     /**
      * @Route("/profile", name="account_profile", methods={"GET"})
      */
-    public function profile(AccountRepository $accountRepository): Response
+    public function profile(): Response
     {
         $account = $this->getUser();
         $person = $account->getPerson();

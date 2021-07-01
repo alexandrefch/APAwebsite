@@ -29,12 +29,15 @@
         <div class="d-flex">
             <div id="nav-overlay"></div>
             <div id="nav-links">
+                <a class="btn" href="{{ path('structure_index') }}">Mon Planning</a>
                 <a class="btn" href="{{ path('structure_index') }}">Structures</a>
                 <a class="btn" href="{{ path('activity_index') }}">Activités</a>
                 {% if is_granted('ROLE_DOCTOR') %}
+                    <div>Médecin</div>
+                    <a class="btn" href="{{ path('account_index') }}">Gestion des patients</a>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <div>Administration</div>
+                    <div>Administrateur</div>
                     <a class="btn" href="{{ path('account_index') }}">Gestion des comptes</a>
                 {% endif %}
             </div>

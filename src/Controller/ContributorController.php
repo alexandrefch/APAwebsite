@@ -18,7 +18,7 @@ class ContributorController extends AbstractController
      */
     public function my_structure(StructureRepository $structureRepository): Response
     {
-        return $this->render('structure/index.html.twig', [
+        return $this->render('structure/home.html.twig', [
             'structures' => $structureRepository->findAll(),
         ]);
     }
