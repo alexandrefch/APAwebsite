@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Doctor;
 
 use App\Entity\Prescription;
 use App\Form\PrescriptionType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/prescription")
+ * @Route("/doctor/prescription")
  */
 class PrescriptionController extends AbstractController
 {
@@ -20,7 +20,7 @@ class PrescriptionController extends AbstractController
      */
     public function index(PrescriptionRepository $prescriptionRepository): Response
     {
-        return $this->render('prescription/home.html.twig', [
+        return $this->render('prescription/index.html.twig', [
             'prescriptions' => $prescriptionRepository->findAll(),
         ]);
     }

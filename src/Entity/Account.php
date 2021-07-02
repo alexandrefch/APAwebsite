@@ -47,9 +47,15 @@ class Account implements UserInterface
      */
     private $prescriptions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Follow::class, mappedBy="doctor")
+     */
+    private $follows;
+
     public function __construct()
     {
         $this->prescriptions = new ArrayCollection();
+        $this->follows = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -169,6 +175,36 @@ class Account implements UserInterface
             // set the owning side to null (unless already changed)
             if ($goal->getPatient() === $this) {
                 $goal->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Follow[]
+     */
+    public function getFollows(): Collection
+    {
+        return $this->follows;
+    }
+
+    public function addFollow(Follow $follow): self
+    {
+        if (!$this->follows->contains($follow)) {
+            $this->follows[] = $follow;
+            $follow->setDoctor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollow(Follow $follow): self
+    {
+        if ($this->follows->removeElement($follow)) {
+            // set the owning side to null (unless already changed)
+            if ($follow->getDoctor() === $this) {
+                $follow->setDoctor(null);
             }
         }
 

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add patient{% endblock %}
+
+{% block body %}
+    <section class="content">
+        <div class="panel shadow-sm">
+            {% for error in errors %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endfor %}
+            {{ form_start(form, {'attr': {'id': 'form'}}) }}
+            {{ form_end(form) }}
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a class="btn btn-icon btn-primary" href="{{ path('patient_index') }}">
+                        {% include 'icon/undo.svg' %}
+                        <span>Retour à la liste</span>
+                    </a>
+                </div>
+                <div class="d-grid gap-2 grid-flow-column">
+                    <button id="btn-save" class="btn btn-icon btn-main">
+                        {% include 'icon/diskette.svg' %}
+                        <span>Ajouter</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script>
+            let btnSave = document.getElementById('btn-save');
+            let form = document.getElementById('form');
+            btnSave.addEventListener('click',function(){form.submit();});
+        </script>
+    </section>
+{% endblock %}

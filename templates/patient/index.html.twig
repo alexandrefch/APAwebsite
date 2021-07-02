@@ -1,25 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Account index{% endblock %}
+{% block title %}Prescription index{% endblock %}
 
 {% block body %}
     <section class="content">
         <div class="row panel">
+            <a class="btn btn-full btn-main mb-3 shadow-sm" href="{{ path('patient_add') }}">
+                <span>Suivre un nouveau patient</span>
+            </a>
             <table id="dataTable" class="table" style="width:100%">
                 <thead>
                 <tr>
-                    <th>Nom / Prénom</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
                     <th class="sm-hide">Email</th>
+                    <th class="sm-hide">Depuis</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for account in accounts %}
-                    <tr>
-                        <td>{{ account.getPerson().firstName }} {{ account.getPerson().lastName }}</td>
-                        <td class="sm-hide">{{ account.email }}</td>
-                        <td><a class="btn-sm btn-main" href="{{ path('account_edit',{'id':account.id}) }}">Éditer</a></td>
-                    </tr>
+                {% for follow in follows %}
+                <tr>
+                    <td>{{ follow.getPatient().getPerson().firstName }}</td>
+                    <td>{{ follow.getPatient().getPerson().lastName }}</td>
+                    <td class="sm-hide">{{ follow.getPatient().email }}</td>
+                    <td class="sm-hide">{{ follow.since|date("m/d/Y") }}</td>
+                    <td><a class="btn-sm btn-main" href="{{ path('patient_show',{'id':follow.getPatient().id}) }}">Voir</a></td>
+                </tr>
                 {% endfor %}
                 </tbody>
             </table>

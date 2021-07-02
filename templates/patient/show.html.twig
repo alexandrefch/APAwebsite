@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account{% endblock %}
+
+{% block body %}
+    <section class="content">
+        <div class="panel shadow-sm">
+            <h5>Informations</h5>
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div>
+                        Prénom : {{ person.firstName }}
+                    </div>
+                    <div>
+                        Nom de famille : {{ person.lastName }}
+                    </div>
+                    <div>
+                        Téléphone : {{ person.phoneNumber }}
+                    </div>
+                    <div>
+                        Email : {{ account.email }}
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                </div>
+            </div>
+        </div>
+        <div class="panel shadow-sm">
+            <h5>Ordonnance</h5>
+            {% if account.getPrescriptions()|length > 0 %}
+                Ordonnace
+            {% else %}
+                Vous n'avez encore pas reçu d'ordonnance
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') and not personal %}
+                <a class="btn btn-main btn-full mt-3" href="{{ path('prescription_new') }}">Rédiger une ordonnance</a>
+            {% endif %}
+        </div>
+        {% if is_granted('ROLE_ADMIN') and not personal %}
+        <div class="d-flex justify-content-between">
+            <div>
+                <a class="btn btn-icon btn-primary" href="{{ path('patient_index') }}">
+                    {% include 'icon/undo.svg' %}
+                    <span>Retour à la liste</span>
+                </a>
+            </div>
+            <div></div>
+        </div>
+        {% endif %}
+    </section>
+{% endblock %}

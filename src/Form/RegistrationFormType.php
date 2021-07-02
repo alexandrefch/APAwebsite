@@ -73,7 +73,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 6,
                         'minMessage' => 'Votre email doit faire plus de 6 caractères',
                         'max' => 180,
-                        'maxMessage' => 'Votre nom de famille doit faire moins de 180 caractères',
+                        'maxMessage' => 'Votre email doit faire moins de 180 caractères',
                     ]),
                 ]
             ])

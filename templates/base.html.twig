@@ -16,6 +16,7 @@
 
     {% endblock %}
 
+    {{ encore_entry_script_tags('app') }}
     {% block javascripts %}
         {#{{ encore_entry_script_tags('app') }}#}
     {% endblock %}
@@ -34,7 +35,7 @@
                 <a class="btn" href="{{ path('activity_index') }}">Activités</a>
                 {% if is_granted('ROLE_DOCTOR') %}
                     <div>Médecin</div>
-                    <a class="btn" href="{{ path('account_index') }}">Gestion des patients</a>
+                    <a class="btn" href="{{ path('patient_index') }}">Gestion des patients</a>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <div>Administrateur</div>
@@ -44,7 +45,7 @@
             {% if app.user == null %}
                 <a class="btn btn-main" href="{{ path('app_authenticate') }}">Se connecter</a>
             {% else %}
-                <a class="btn btn-main" href="{{ path('account_profile') }}">Mon profil</a>
+                <a class="btn btn-main" href="{{ path('my_profile') }}">Mon profil</a>
             {% endif %}
             <div id="navbar-menu-icon">
                 {% include 'icon/menu.svg' %}

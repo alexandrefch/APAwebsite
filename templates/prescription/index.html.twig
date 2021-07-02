@@ -3,41 +3,19 @@
 {% block title %}Prescription index{% endblock %}
 
 {% block body %}
-    <h1>Prescription index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Goal</th>
-                <th>Creation_date</th>
-                <th>Duration</th>
-                <th>Min_time_sport_week</th>
-                <th>Max_time_sport_week</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for prescription in prescriptions %}
-            <tr>
-                <td>{{ prescription.id }}</td>
-                <td>{{ prescription.goal }}</td>
-                <td>{{ prescription.creationDate ? prescription.creationDate|date('Y-m-d') : '' }}</td>
-                <td>{{ prescription.duration }}</td>
-                <td>{{ prescription.minTimeSportWeek }}</td>
-                <td>{{ prescription.maxTimeSportWeek }}</td>
-                <td>
-                    <a href="{{ path('prescription_show', {'id': prescription.id}) }}">show</a>
-                    <a href="{{ path('prescription_edit', {'id': prescription.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('prescription_new') }}">Create new</a>
+    <section class="content">
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="row mb-3">
+                <a class="btn btn-full btn-main" href="{{ path('structure_new') }}">
+                    <span>Rédiger une ordonnance</span>
+                </a>
+            </div>
+        {% endif %}
+        <div class="row">
+            {% for prescription in prescriptions %}
+            {% else %}
+                Pas d'ordonnance
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

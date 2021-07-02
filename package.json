@@ -22,6 +22,9 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "datatables.net": "^1.10.25",
+        "datatables.net-bs4": "^3.2.2",
+        "jquerry": "^0.0.1-security",
         "wavify": "^1.0.0"
     }
 }
